@@ -1,0 +1,22 @@
+{
+  "name": "friendafriend",
+  "version": "1.0.0",
+  "description": "pet and household swap ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FriendAFriend/FriendaFriend.git"
+  },
+  "author": "FriendAFriend org",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FriendAFriend/FriendaFriend/issues"
+  },
+  "homepage": "https://github.com/FriendAFriend/FriendaFriend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
