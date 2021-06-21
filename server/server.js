@@ -4,10 +4,6 @@ const path = require('path');
 const apiRouter = require('./routes/api');
 // const mongoose = require('mongoose'); 
 const cors = require('cors'); 
-require('dotenv').config();
-
-// port is 3000 in dev and 8080 in production
-const PORT = process.env.NODE_ENV === 'development' ? 3000 : 8080;
 
 // handle parsing request body
 app.use(express.json());
@@ -40,6 +36,6 @@ app.use((err, req, res, next) => {
     return res.status(errorObj.status).json(errorObj.message);
   });
 
-app.listen(PORT, () => {
+app.listen(3000, () => {
     console.log('Listening on port 3000');
 }); 
