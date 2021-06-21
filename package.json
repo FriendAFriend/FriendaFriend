@@ -4,9 +4,7 @@
   "description": "pet and household swap ",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node server/server.js",
-    "build": "webpack --config ./webpack.config.js",
-    "dev": "NODE_ENV=development webpack serve --open & NODE_ENV=development nodemon server/server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
