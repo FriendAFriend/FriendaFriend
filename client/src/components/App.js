@@ -1,8 +1,16 @@
 import React from 'react';
-
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators } from '../actions/actionCreator';
+//import { connect } from 'react-redux';
 
 function App() {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const { createAccount, loginAccount } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   return (
     <div className="App">
       <header className="App-header">
@@ -16,5 +24,5 @@ function App() {
 //   lists: state.lists,
 // });
 
-//export default mapStateToProps(App);
+// export default mapStateToProps(App);
 export default App;
