@@ -16,31 +16,20 @@ listingController.getListing = (req, res, next) => {
                          WHERE user_id = $1;`;
     db.query(queryString, queryParams, (err, result) => {
       if (err) return next({ status: 500, message: `Error in listingController.getListing: ${err}` });
-      res.locals.listings = result.rows; // ! one listing or many? 
+      res.locals.listings = result.rows[0]; // ! one listing or many? 
       return next();
     });
   };
 
-//   listingController.getListing = (req, res, next) => {
-//     const body = [req.body];
-
-//     const queryParams = [
-//         body.user_id,
-//         body.listing_name,
-//         body.start_date,
-//         body.end_date,
-//         body.pending_status,
-//         body.rating,
-//         body.photo
-//     ]; // ! _ID
-//     const queryString = `SELECT * FROM listing
-//                          WHERE pending_status = $5;`;
-//     db.query(queryString, queryParams, (err, result) => {
-//       if (err) return next({ status: 500, message: `Error in listingController.getListing: ${err}` });
-//       res.locals.listings = result.rows; // ! one listing or many? 
-//       return next();
-//     });
-//   };
+// returns all listings from the table where status is active/available 
+listingController.getAllListings = (req, res, next) => {
+    const queryString = `SELECT * FROM listing;`;
+    db.query(queryString, (err, result) => {
+        if (err) return next({ status: 500, message: `Error in listingController.getAllListings: ${err}`});
+        res.locals.listings = result.rows;
+        return next();
+    });
+};
 
 /* inserts a new value into the listing table */ 
 listingController.createListing = (req, res, next) => {

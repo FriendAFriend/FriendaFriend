@@ -8,7 +8,7 @@ const bcrypt = require('bcrypt');
 const userController = {};
 
 // find a user by email
-// get user by id in params
+// ! what if we don't find any user with that email?
 // sets the user row onto res.locals.user
 userController.getUser = (req, res, next) => {
     const body = req.body;
