@@ -12,9 +12,9 @@ function App() {
   );
 }
 
-// const mapStateToProps = (state) => ({
-//   lists: state.lists,
-// });
+const mapStateToProps = (state) => ({
+  lists: state.lists,
+});
 
-//export default mapStateToProps(App);
-export default App;
+export default mapStateToProps(App);
+
