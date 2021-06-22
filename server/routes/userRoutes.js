@@ -5,7 +5,7 @@ const userController = require('../controllers/userController');
 const router = express.Router(); 
 
 // get user information (log in logic)
-router.get('/',
+router.get('/login',
     userController.getUser, 
     userController.verifyUser, 
     (req, res) => {
@@ -13,7 +13,7 @@ router.get('/',
 });
 
 // post a new user (sign-up logic)
-router.post('/', 
+router.post('/signup', 
     userController.createUser,
     (req, res) => {
         res.status(200).json(res.locals.user);

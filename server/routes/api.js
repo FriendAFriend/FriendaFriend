@@ -18,9 +18,9 @@ router.get('/dashboard',
 router.get('/myListings', 
   listingController.getListing,
   (req, res) => {
-    res.status(200).json(res.locals.listing);
+    res.status(200).json(res.locals.listings);
   }
-)
+);
 
 // post request creates a listing with associated dog and photos table insertions
 router.post('/newListing',
@@ -35,7 +35,7 @@ router.post('/newListing',
 );
 
 // update an already-created listing; different from routes for deleting or adding photos
-router.put('/', 
+router.put('/updateListing', 
   listingController.updateListing,
   (req, res) => {
     // res.redirect('/dashboard');
@@ -43,14 +43,21 @@ router.put('/',
   }
 );
 
-// delete a listing
+router.post('/newPhoto', 
+  photoController.createPhoto,
+  (req, res) => {
+    res.status(200).json(res.locals.photos);
+  }
+);
+
+// delete a listing permanently, associated photos and pet
 router.delete('/', 
   listingController.deleteListing,
   photoController.deletePhoto,
   petController.deletePet,
   (req, res) => {
     res.redirect('/dashboard');
-    res.status(200).json(res.locals.listing);
+    //res.status(200).json(res.locals.listing);
   }
 );
 
