@@ -18,14 +18,13 @@ if (process.env.NODE_ENV === 'production') {
 // API ROUTER logic handled in api.js
 app.use('/api', apiRouter);
 
-// catch-all route handler
-app.use((req, res) =>
-  res.status(404).send("Sorry! I could not find the page you're looking for!")
-);
-
 app.get('*', (req, res) =>
   res.status(200).sendFile(path.join(__dirname, './index.html'))
 );
+//catch-all route handler
+// app.use((req, res) =>
+//   res.status(404).send("Sorry! I could not find the page you're looking for!")
+// );
 
 // statically serve everything in the build folder on the route '/build'
 
