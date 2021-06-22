@@ -16,4 +16,4 @@ const mapStateToProps = (state) => ({
   lists: state.lists,
 });
 
-export default mapStateToProps(App);
+export default  App //mapStateToProps(App);
