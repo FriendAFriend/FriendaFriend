@@ -8,11 +8,12 @@ const bcrypt = require('bcrypt');
 const userController = {};
 
 // find a user by email
+// get user by id in params
 // sets the user row onto res.locals.user
 userController.getUser = (req, res, next) => {
     const queryParams = [req.body.email];
-    const queryString = `SELECT * FROM user
-                         WHERE email = $1;`;
+    const queryString = `SELECT * FROM "public"."user"
+                        WHERE email = $1;`;
     db.query(queryString, queryParams, (err, result) => {
       if (err) return next({ status: 500, message: `Error in userController.getUser. ${err}` });
       res.locals.user = result.rows[0];
@@ -24,7 +25,7 @@ userController.getUser = (req, res, next) => {
 userController.verifyUser = (req, res, next) => {
   const body = req.body;
   const queryParams = [body.email];
-  const queryString = `SELECT * FROM user
+  const queryString = `SELECT * FROM public."user"
                        WHERE email = $1;`;
   db.query(queryString, queryParams, (err, result) => {
     if (err) return next({ status: 500, message: `Error in userController.verifyUser: ${err}`});
@@ -43,6 +44,7 @@ userController.verifyUser = (req, res, next) => {
 
 // creates a user row with bcrypted password
 // TODO does not seem to have collision handling for an already created user?
+// try catch to send create user error, err 
 userController.createUser = async (req, res, next) => {
   const body = req.body;
   console.log('body in createUser', body);
@@ -59,7 +61,7 @@ userController.createUser = async (req, res, next) => {
     body.phone,
     body.email
   ];
-  const queryString = `INSERT INTO user (legal_name, city, description, pet_count, username, password, phone, email)
+  const queryString = `INSERT INTO public."user" (legal_name, city, description, pet_count, username, password, phone, email)
                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
   db.query(queryString, queryParams, (err, result) => {
     if (err) return next(err);

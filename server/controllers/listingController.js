@@ -11,14 +11,8 @@ listingController.getListing = (req, res, next) => {
 
     const queryParams = [
         body.user_id,
-        body.listing_name,
-        body.start_date,
-        body.end_date,
-        body.pedning_status,
-        body.rating,
-        body.photo
     ]; // ! _ID
-    const queryString = `SELECT * FROM listing
+    const queryString = `SELECT * FROM public."listing"
                          WHERE user_id = $1;`;
     db.query(queryString, queryParams, (err, result) => {
       if (err) return next({ status: 500, message: `Error in listingController.getListing: ${err}` });
@@ -27,21 +21,46 @@ listingController.getListing = (req, res, next) => {
     });
   };
 
+//   listingController.getListing = (req, res, next) => {
+//     const body = [req.body];
+
+//     const queryParams = [
+//         body.user_id,
+//         body.listing_name,
+//         body.start_date,
+//         body.end_date,
+//         body.pending_status,
+//         body.rating,
+//         body.photo
+//     ]; // ! _ID
+//     const queryString = `SELECT * FROM listing
+//                          WHERE pending_status = $5;`;
+//     db.query(queryString, queryParams, (err, result) => {
+//       if (err) return next({ status: 500, message: `Error in listingController.getListing: ${err}` });
+//       res.locals.listings = result.rows; // ! one listing or many? 
+//       return next();
+//     });
+//   };
+
 /* inserts a new value into the listing table */ 
 listingController.createListing = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
+    // const userID= req.params.user_id;
 
+   console.log(userID, 'is here !')
+    console.log(req.body);
     const queryParams = [
+        // userID, 
         body.user_id,
         body.listing_name,
         body.start_date,
         body.end_date,
-        body.pedning_status,
+        body.pending_status,
         body.rating,
         body.photo
     ];
-    const queryString = `INSERT INTO listing
-                         VALUES user_id = $1, listing_name = $2, start_date = $3, end_date = $4, pedning_status = $5, rating = $6, photo = $7;`;
+    const queryString = `INSERT INTO "public"."listing" (user_id, listing_name, start_date, end_date, pending_status, rating, photo)
+                         VALUES ($1, $2, $3, $4, $5, $6, $7);`;
     db.query(queryString, queryParams, (err, result) => {
         if (err) return next({ status: 500, message: `Error in listingController.createListing: ${err}` });
         return next();
@@ -52,11 +71,12 @@ listingController.updateListing = (req, res, next) => {
     const body = [res.body];
     
     const queryParams = [
+        body.listing_id,
         body.user_id,
         body.listing_name,
         body.start_date,
         body.end_date,
-        body.pedning_status,
+        body.pending_status,
         body.rating,
         body.photo
     ]; // ! see table
@@ -73,7 +93,8 @@ listingController.deleteListing = (req, res, next) => {
     const body = [req.body];
 
     const queryParams = [
-        body.user_id
+        body.user_id,
+        body.listing_name
     ];
     const queryString = `DELETE FROM listing
                          WHERE user_id = $1
