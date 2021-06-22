@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { actionCreators } from '../actions/actionCreator';
+import { actionCreators } from '../actions/actionCreators';
 //import { connect } from 'react-redux';
 
 function App() {
@@ -26,8 +26,3 @@ const mapStateToProps = (state) => ({
 
 export default mapStateToProps(App);
 
-<<<<<<< HEAD
-=======
-// export default mapStateToProps(App);
-export default App;
->>>>>>> 7777b297919d73711399f292042e10f9c636b53f
