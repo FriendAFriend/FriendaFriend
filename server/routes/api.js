@@ -22,7 +22,7 @@ router.get('/myListings',
   }
 );
 
-// post request creates a listing with associated dog and photos table insertions
+// post request creates a listing with associated pet and photos table insertions
 router.post('/newListing',
   listingController.createListing,
   photoController.createPhoto,

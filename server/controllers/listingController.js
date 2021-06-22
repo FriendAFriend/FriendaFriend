@@ -27,7 +27,7 @@ listingController.getListing = (req, res, next) => {
     });
   };
 
-// returns all listings from the table
+// returns all listings from the table where status is active/available 
 listingController.getAllListings = (req, res, next) => {
     const queryString = `SELECT * FROM listing;`;
     db.query(queryString, (err, result) => {
