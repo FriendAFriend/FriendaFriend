@@ -9,7 +9,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, './index.html'));
+    return res
+      .status(200)
+      .sendFile(path.join(__dirname, '../client/public/index.html'));
   });
   app.use('/build', express.static(path.join(__dirname, '../build')));
   // serve index.html on the route '/'
@@ -19,9 +21,10 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api', apiRouter);
 
 app.get('*', (req, res) =>
-  res.status(200).sendFile(path.join(__dirname, './index.html'))
+  res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'))
 );
 //catch-all route handler
+
 // app.use((req, res) =>
 //   res.status(404).send("Sorry! I could not find the page you're looking for!")
 // );
