@@ -11,7 +11,8 @@ const userController = {};
 // get user by id in params
 // sets the user row onto res.locals.user
 userController.getUser = (req, res, next) => {
-    const queryParams = [req.body.email];
+    const body = req.body;
+    const queryParams = [body.email];
     const queryString = `SELECT * FROM "public"."user"
                         WHERE email = $1;`;
     db.query(queryString, queryParams, (err, result) => {
@@ -49,7 +50,7 @@ userController.createUser = async (req, res, next) => {
   const body = req.body;
   console.log('body in createUser', body);
   const SALT_FACTOR = 10;
-  const hashedPassword = await bcrypt.hash(req.body.password, SALT_FACTOR);
+  const hashedPassword = await bcrypt.hash(body.password, SALT_FACTOR);
 
   const queryParams = [
     body.legal_name,

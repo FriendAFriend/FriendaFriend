@@ -8,7 +8,7 @@ const photoController = {};
 
 // GET request for photo table
 photoController.getPhoto = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
 
     const queryParams = [
         body.user_id,
@@ -25,7 +25,7 @@ photoController.getPhoto = (req, res, next) => {
 
 /* inserts a new value into the photo table */ 
 photoController.createPhoto = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
 
     const queryParams = [
         body.user_id,
@@ -41,7 +41,7 @@ photoController.createPhoto = (req, res, next) => {
 };
 
 photoController.deletePhoto = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
 
     const queryParams = [
         body.user_id,

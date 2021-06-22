@@ -7,7 +7,7 @@ const listingController = {};
 
 // GET request for all details related to a listing
 listingController.getListing = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
 
     const queryParams = [
         body.user_id,
@@ -68,7 +68,7 @@ listingController.createListing = (req, res, next) => {
 };
 
 listingController.updateListing = (req, res, next) => {
-    const body = [res.body];
+    const body = req.body;
     
     const queryParams = [
         body.listing_id,
@@ -90,7 +90,7 @@ listingController.updateListing = (req, res, next) => {
 };
 
 listingController.deleteListing = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
 
     const queryParams = [
         body.user_id,

@@ -18,7 +18,7 @@ petController.getPet = (req, res, next) => {
 
 /* inserts a new value into the pet table */ 
 petController.createPet = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
     const queryParams = [
         body.user_id,
         body.pet_name,
@@ -35,7 +35,7 @@ petController.createPet = (req, res, next) => {
 };
 
 petController.updatePet = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
     const queryParams = [
         body.user_id,
         body.pet_name,
@@ -53,7 +53,7 @@ petController.updatePet = (req, res, next) => {
 };
 
 petController.deletePet = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
 
     const queryParams = [
         body.user_id,
