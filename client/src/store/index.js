@@ -2,7 +2,7 @@ import { applyMiddleware } from 'redux';
 import { createStore } from 'redux';
 import thunk from 'redux-thunk';
 const reducer = () => {
-  user = {
+  let user = {
     user_id: 4,
     legal_name: 'Erik',
     city: 'chicago',
