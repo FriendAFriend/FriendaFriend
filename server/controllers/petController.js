@@ -7,7 +7,11 @@ const petController = {};
 
 // GET request for all details related to a pet
 petController.getPet = (req, res, next) => {
-    const queryParams = [req.body.user_id]; // ! _ID
+    const user_id = req.params.user_id;
+
+    const queryParams = [
+        user_id
+    ];
     const queryString = `SELECT * FROM pet WHERE user_id = $1;`;
     db.query(queryString, queryParams, (err, result) => {
       if (err) return next({ status: 500, message: `Error in petController.getPet: ${err}` });
@@ -19,10 +23,11 @@ petController.getPet = (req, res, next) => {
 /* inserts a new value into the pet table */ 
 petController.createPet = (req, res, next) => {
     const body = req.body;
+    
     const queryParams = [
         body.user_id,
         body.pet_name,
-        body.descirption,
+        body.description,
         body.type,
         body.photo
     ];
@@ -36,6 +41,7 @@ petController.createPet = (req, res, next) => {
 
 petController.updatePet = (req, res, next) => {
     const body = req.body;
+
     const queryParams = [
         body.user_id,
         body.pet_name,

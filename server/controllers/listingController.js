@@ -7,10 +7,10 @@ const listingController = {};
 
 // GET request for all details related to a listing
 listingController.getListing = (req, res, next) => {
-    const body = req.body;
+    const user_id = req.params.user_id;
 
     const queryParams = [
-        body.user_id,
+        user_id
     ]; // ! _ID
     const queryString = `SELECT * FROM public."listing"
                          WHERE user_id = $1;`;
@@ -34,12 +34,11 @@ listingController.getAllListings = (req, res, next) => {
 /* inserts a new value into the listing table */ 
 listingController.createListing = (req, res, next) => {
     const body = req.body;
-    // const userID= req.params.user_id;
+    // const user_id= req.params.user_id;
 
-   console.log(userID, 'is here !')
+//    console.log(user_id, 'is here !')
     console.log(req.body);
     const queryParams = [
-        // userID, 
         body.user_id,
         body.listing_name,
         body.start_date,
@@ -58,10 +57,11 @@ listingController.createListing = (req, res, next) => {
 
 listingController.updateListing = (req, res, next) => {
     const body = req.body;
+    const user_id= req.params.user_id;
     
     const queryParams = [
+        user_id,
         body.listing_id,
-        body.user_id,
         body.listing_name,
         body.start_date,
         body.end_date,
@@ -80,9 +80,10 @@ listingController.updateListing = (req, res, next) => {
 
 listingController.deleteListing = (req, res, next) => {
     const body = req.body;
+    const user_id= req.params.user_id;
 
     const queryParams = [
-        body.user_id,
+        user_id,
         body.listing_name
     ];
     const queryString = `DELETE FROM listing
