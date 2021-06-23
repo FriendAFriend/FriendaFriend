@@ -21,14 +21,10 @@ const UserLogin = () => {
     
         setSubmitted(true);
         if (
-          user.username &&
-          user.password 
+          logininfo.username &&
+          logininfo.password 
         ) {
-        try {dispatch(loginUser(user))
-            } catch(err) {
-                setInvalidLogin(true)
-            }
-          
+            dispatch(loginUser(logininfo))
         } else {
           window.alert(
             'You must provide a username and password'
@@ -54,7 +50,7 @@ const UserLogin = () => {
               <input
                 type="password"
                 name="password"
-                value={user.password}
+                value={logininfo.password}
                 onChange={handleChange}
                 className=""
               />
