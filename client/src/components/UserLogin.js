@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { loginUser } from '../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
+import { set } from 'react-hook-form';
 
 const UserLogin = () => {
     const dispatch = useDispatch();
-    const [logininfo, setLoginInfo] = useState({
+    const [user, setUser] = useState({
         username: '',
         password: ''
     })
     const [submitted, setSubmitted] = useState(false);
-    const [invalidLogin, setInvalidLogin] = useState(false)
+    
 
     function handleChange(e) {
         const { name, value } = e.target;
-        setLoginInfo((logininfo) => ({ ...logininfo, [name]: value }));
+        setUser((user) => ({ ...user, [name]: value }));
       }
     
       function handleSubmit(e) {
@@ -21,10 +22,11 @@ const UserLogin = () => {
     
         setSubmitted(true);
         if (
-          logininfo.username &&
-          logininfo.password 
+          user.username &&
+          user.password 
         ) {
-            dispatch(loginUser(logininfo))
+            dispatch(loginUser(user))
+           const loginFailure = useSelector(state => state.userReducer.user)
         } else {
           window.alert(
             'You must provide a username and password'
@@ -40,7 +42,7 @@ const UserLogin = () => {
               <input
                 type="text"
                 name="Username"
-                value={logininfo.username}
+                value={user.username}
                 onChange={handleChange}
                 className=""
               />
@@ -50,11 +52,11 @@ const UserLogin = () => {
               <input
                 type="password"
                 name="password"
-                value={logininfo.password}
+                value={user.password}
                 onChange={handleChange}
                 className=""
               />
-               {submitted && invalidLogin && (
+               {submitted && loginFailure && (
                 <div className="">Username or Password incorrect</div>
               )}
             </div>

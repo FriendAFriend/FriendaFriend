@@ -15,7 +15,10 @@ const userReducer = (state = initialState, action) => {
     case 'CREATE_USER':
       return { ...state, ...action.payload };
     case 'LOGIN_USER':
-      return { ...state };
+      return { 
+        loggedIn: true,
+        user: action.payload
+      };
     case 'LOGIN_FAILURE':
       return {...state, loginErr: action.payload}
     default:
