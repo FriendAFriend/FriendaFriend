@@ -17,30 +17,24 @@ class PhotoUpload extends Component {
 
   onChange = (e) => {
     console.log('onchange fired', e.target.files);
-    const files = Array.from(e.target.files)
+    const [file] = e.target.files;
     this.setState({ uploading: true })
 
     const formData = new FormData();
-
-    files.forEach((file, i) => {
-      formData.append('upload_preset', 'ml_default');
-      formData.append(i, file);
+    formData.append('file', file);
+    formData.append('upload_preset', 'FriendAFriend');
+    
+    fetch(`${CLOUDINARY_URL}`, {
+      method: 'POST',
+      body: formData
     })
-
-      fetch(`${CLOUDINARY_URL}`, {
-        method: 'POST',
-        body: formData
+    .then(res => res.json())
+    .then(images => {
+      this.setState({ 
+        uploading: false,
+        images
       })
-      // console.log(data.json());
-      // const newData = data.json();
-      // console.log(newData);
-      .then(res => res.json())
-      .then(images => {
-        this.setState({ 
-          uploading: false,
-          images
-        })
-      })
+    })
     }
 
   removeImage = (id) => {
