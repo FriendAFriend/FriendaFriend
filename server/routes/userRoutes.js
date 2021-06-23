@@ -5,14 +5,11 @@ const userController = require('../controllers/userController');
 const router = express.Router();
 
 // get user information (log in logic)
-router.get(
-  '/login',
-  userController.getUser,
-  userController.verifyUser,
-  (req, res) => {
-    res.status(200).json(res.locals.user);
-  }
-);
+router.get('/login', userController.verifyUser, (req, res) => {
+  //if successful to dashbaord
+  console.log('successful login');
+  return res.redirect(200, './api/dashboard');
+});
 
 // post a new user (sign-up logic)
 router.post('/signup', userController.createUser, (req, res) => {
