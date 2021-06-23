@@ -25,13 +25,18 @@ module.exports = {
         //  username
         });
     },
-    verifyJWT: (token, password, res) => {
-        jwt.verify(token, password, function(err, decoded){
+    verifyJWT: (token, password, res, next) => {
+        return jwt.verify(token, password, function(err, decoded){
             if(err){
               console.log('error in verifyJWT');
-              return res.send(err.message);
+            //   return next();
+            // redirect to signup 
+            //   return res.send(err.message);
+            return false;
+            //   return res.redirect('../routes/userRoutes/signup');
             };
             console.log('success in verifyJWT');
+            return true;
           });
     }
 }

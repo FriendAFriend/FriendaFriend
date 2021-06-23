@@ -33,7 +33,7 @@ router.post('/newListing',
 );
 
 router.post('/newPet',
-  petController.createPet,
+  listingController.createListing,
   // ! do we then want to reroute them to the dashboard and display all listings? 
   (req, res) => {
     // res.redirect('/dashboard');

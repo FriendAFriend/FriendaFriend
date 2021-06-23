@@ -28,18 +28,19 @@ userController.getUser = (req, res, next) => {
 }
 
 /* finds a user by email and compares the password with bcrypt user row is saved to res.locals.user */
-userController.verifyUser = (req, res, next) => {
+userController.verifyUser = async (req, res, next) => {
   const body = req.body;
   const token = req.cookies.jwt;
   
 
-  console.log('here is req.cookies ', token);
-  console.log('here is password ', body.password);
-  // console.log('here is req.cookies ', req.cookie);
-  verifyJWT(token, body.password, res, (err, req, res, next) => {
-      console.log('here is NO error in verify Auth');
-      return next();
-  });
+  // console.log('here is req.cookies ', token);
+  // console.log('here is password ', body.password);
+  const isVerified = await verifyJWT(token, body.password, res, next);
+  console.log('this is verified :', isVerified);
+
+  if (isVerified) {
+    return next();
+  }
 
 
   const queryParams = [
@@ -54,10 +55,11 @@ userController.verifyUser = (req, res, next) => {
     }
     bcrypt.compare(body.password, result.rows[0].password, (err, isMatched) => {
       if (isMatched === false) {
-        return res.status(400).json({ userVerified: false, message: 'Password incorrect.'});
+        return res.redirect(401, '../routes/userRoutes/signup')
+        // return res.status(400).json({ userVerified: false, message: 'Password incorrect.'});
       }
       res.locals.user = result.rows[0];
-      console.log(res.locals.user);
+      console.log(res.locals.user, 'here is user');
       return next();
     });
   });
