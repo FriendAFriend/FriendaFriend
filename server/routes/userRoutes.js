@@ -9,7 +9,8 @@ router.get('/login',
     userController.verifyUser, 
     (req, res) => {
         //if successful to dashbaord
-        res.status(200).json(res.locals.user);
+        console.log('successful login');
+        return res.redirect(200, './api/dashboard');
 });
 
 // post a new user (sign-up logic)
