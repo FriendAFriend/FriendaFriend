@@ -1,7 +1,9 @@
+import store from '../store';
+
 export const createAccount = (userInfo) => {
   return (dispatch) => {
     dispatch({
-      type: 'create account',
+      type: 'createAccount',
       payload: userInfo,
     });
   };
@@ -10,8 +12,22 @@ export const createAccount = (userInfo) => {
 export const loginAccount = (userInfo) => {
   return (dispatch) => {
     dispatch({
-      type: 'login account',
+      type: 'loginAccount',
       payload: userInfo,
     });
   };
 };
+
+// store.dispatch({
+//   type: 'createAccount',
+//   payload: {
+//     description: 'userInfo',
+//   },
+// });
+
+// store.dispatch({
+//   type: 'loginAccount',
+//   payload: {
+//     description: 'userInfo',
+//   },
+// });
