@@ -75,16 +75,13 @@ userController.createUser = async (req, res, next) => {
 
   const queryParams = [
     body.legal_name,
-    body.city,
-    body.description,
     body.pet_count,
     body.username,
     hashedPassword,
-    body.phone,
     body.email
   ];
-  const queryString = `INSERT INTO public."user" (legal_name, city, description, pet_count, username, password, phone, email)
-                       VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+  const queryString = `INSERT INTO public."user" (legal_name, pet_count, username, password, email)
+                       VALUES ($1, $2, $3, $4, $5);`;
   db.query(queryString, queryParams, async (err, result) => {
     // console.log(err.detail, 'here is error in create user');
     if (err) return next(err.detail, 'Username or email already exist');

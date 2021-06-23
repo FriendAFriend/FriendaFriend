@@ -45,10 +45,11 @@ listingController.createListing = (req, res, next) => {
         body.end_date,
         body.pending_status,
         body.rating,
-        body.photo
+        body.photo,
+        body.city
     ];
     const queryString = `INSERT INTO "public"."listing" (user_id, listing_name, start_date, end_date, pending_status, rating, photo)
-                         VALUES ($1, $2, $3, $4, $5, $6, $7);`;
+                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
     db.query(queryString, queryParams, (err, result) => {
         if (err) return next({ status: 500, message: `Error in listingController.createListing: ${err}` });
         return next();
