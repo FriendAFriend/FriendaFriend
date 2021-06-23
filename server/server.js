@@ -7,12 +7,12 @@ const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
 const cors = require('cors')
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
+//   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+//   next();
+// });
 // const { CLIENT_ORIGIN } = require('./config')
 
 cloudinary.config({ 
@@ -21,7 +21,9 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
   
-app.use(cors());
+app.use(cors(
+  {origin: 'http://localhost:3000'}
+));
 //   { 
 //   origin: '*', // "client_origin" 
 //   "Access-Control-Allow-Headers": '*'
@@ -33,6 +35,7 @@ app.use(formData.parse());
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
 if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
     return res
@@ -43,16 +46,19 @@ if (process.env.NODE_ENV === 'production') {
   // serve index.html on the route '/'
 }
 
-// post for image uploads
+// post for image uploads to cloudinary
 app.post('/image-upload', (req, res) => {
   const values = Object.values(req.files)
   const promises = values.map(image => cloudinary.uploader.upload(image.path))
     Promise
       .all(promises)
-      .then(results => res.json(results))
+      .then(data => res.json(data))
 });
 
-// API ROUTER logic handled in api.js
+/* API ROUTER logic handled in api.js
+invludes all listing CRUD functionality 
+as well as pet and photo storage - user 
+info for signup/login is a separate router */ 
 app.use('/api', apiRouter);
 
 // serve index

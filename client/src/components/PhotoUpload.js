@@ -8,14 +8,14 @@ import '../scss/styles.scss';
 
 const CLOUDINARY_URL = 'cloudinary://147716195169729:z3CsbJd9YXSRFF6k9oZc9fJxI14@diwmmmiwe';
 
-export default class PhotoUpload extends Component {
+class PhotoUpload extends Component {
   
   state = {
     uploading: false,
     images: []
   }
 
-  onChange = e => {
+  onChange = (e) => {
     const files = Array.from(e.target.files)
     this.setState({ uploading: true })
 
@@ -25,7 +25,7 @@ export default class PhotoUpload extends Component {
       formData.append(i, file)
     })
 
-    fetch(`https://localhost:8080/image-upload`, {
+    fetch(`https://localhost:3000/image-upload`, {
       method: 'POST',
       body: formData
     })
@@ -38,14 +38,14 @@ export default class PhotoUpload extends Component {
     })
   }
 
-  removeImage = id => {
+  removeImage = (id) => {
     this.setState({
       images: this.state.images.filter(image => image.public_id !== id)
     })
   }
   
   render() {
-    const { uploading, images } = this.state
+    const { uploading, images } = this.state;
 
     const content = () => {
       switch(true) {
@@ -56,7 +56,7 @@ export default class PhotoUpload extends Component {
         default:
           return <Buttons onChange={this.onChange} />
       }
-    }
+    };
 
     return (
       <div>
@@ -67,3 +67,5 @@ export default class PhotoUpload extends Component {
     )
   }
 };
+
+export default PhotoUpload;
