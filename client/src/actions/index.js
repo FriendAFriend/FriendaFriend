@@ -35,25 +35,14 @@ export const loginUser = (user) => async (dispatch, getState) => {
   
 };
 
-// export const loginUser = (userInfo) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: 'loginUser',
-//       payload: userInfo,
-//     });
-//   };
-// };
-
-// store.dispatch({
-//   type: 'createAccount',
-//   payload: {
-//     description: 'userInfo',
-//   },
-// });
-
-// store.dispatch({
-//   type: 'loginAccount',
-//   payload: {
-//     description: 'userInfo',
-//   },
-// });
+export const createListing = (listing) => async (dispatch, getState) => {
+  const res = await fetch('http://localhost:8080/api/newListing', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(listing)
+})
+ const newListing = await res.json()
+ dispatch({ type: 'NEW_LISTING', payload: newListing})
+}
