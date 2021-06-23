@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
 const Images = ({images, removeImage}) => 
-  images.map((image, i) =>
+<div>
+  {images.map((image, i) =>
     <div key={i} className='fadein'>
       <div 
         onClick={() => removeImage(image.public_id)} 
@@ -13,6 +14,8 @@ const Images = ({images, removeImage}) =>
       </div>
       <img src={image.secure_url} alt='' />
     </div>
-  );
+  )}
+</div>
+  ;
 
 export default Images;
