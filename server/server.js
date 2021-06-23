@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'production') {
 // API ROUTER logic handled in api.js
 app.use('/api', apiRouter);
 app.use('/user', userRouter);
-app.get('/', (req, res) =>
+app.get('*', (req, res) =>
   res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'))
 );
 //catch-all route handler

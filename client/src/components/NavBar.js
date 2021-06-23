@@ -1,7 +1,12 @@
 import React from 'react';
-//import Logo from '../assets/Asset_3.svg';
+import { NavLink } from 'react-router-dom';
+
+// import Cookies from 'universal-cookie';
+// const cookies = new Cookies();
 
 const Navbar = () => {
+  // const deleteJWT = (e) => {
+  //   cookies.remove("jwt");
   return (
     <header>
       <div id="logo-main-container">
@@ -9,33 +14,29 @@ const Navbar = () => {
       </div>
 
       <ul className="nav-links">
-        <li>
-          <a
-            href="https://coralfussman.medium.com/atlantis-47639b78d34d"
-            target="_blank"
-          >
-            Home
-          </a>
-        </li>
-        <li>
-          <a
-            href="https://www.npmjs.com/package/atlantis-cache"
-            target="_blank"
-          >
-            Login
-          </a>
-        </li>
-        <li>
-          <a href="#field">Dashboard</a>
-        </li>
-        <li>
-          <a href="#team">Search</a>
-        </li>
-        <li>
-          <a href="https://github.com/oslabs-beta/Atlantis" target="_blank">
-            GITHUB
-          </a>
-        </li>
+        <NavLink className="navLink" to="/">
+          HOME
+        </NavLink>
+
+        <NavLink className="navLink" to="/signup">
+          REGISTER
+        </NavLink>
+        <NavLink className="navLink" to="/login">
+          LOGIN
+        </NavLink>
+
+        <NavLink className="navLink" to="/dashboard">
+          DASHBOARD
+        </NavLink>
+        <NavLink className="navLink" to="/pets">
+          PETS
+        </NavLink>
+
+        <NavLink className="navLink" to="/search">
+          SEARCH
+        </NavLink>
+
+        {/* <NavLink className="navLink" to="/"> <span onClick={deleteJWT}>LOGOUT</span>   </NavLink> */}
       </ul>
     </header>
   );

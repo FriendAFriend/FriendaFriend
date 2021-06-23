@@ -1,18 +1,28 @@
 import React from 'react';
 import { Route, withRouter, Switch } from 'react-router';
 import SearchContainer from '../containers/SearchContainer';
+import PetsContainer from '../containers/PetsContainer';
 import UserRegistration from './UserRegistration';
+import UserLogin from './UserLogin';
 import Dashboard from '../containers//Dashboard';
 import Home from './Home.js';
 import NavBar from './NavBar';
 
 function App() {
-  const renderForm = () => {
+  const renderRegisterForm = () => {
     return <UserRegistration />;
+  };
+
+  const renderLoginForm = () => {
+    return <UserLogin />;
   };
 
   const renderDashboard = () => {
     return <Dashboard />;
+  };
+
+  const renderPets = () => {
+    return <PetsContainer />;
   };
 
   const renderSearch = () => {
@@ -31,9 +41,10 @@ function App() {
           <NavBar />
           <Switch>
             <Route path="/" exact component={Home} />
-            {/* <Route path="/login" render={renderForm} /> */}
-            <Route path="/signup" render={renderForm} />
+            <Route path="/signup" render={renderRegisterForm} />
+            <Route path="/login" render={renderLoginForm} />
             <Route path="/dashboard" render={renderDashboard} />
+            <Route path="/pets" render={renderPets} />
             <Route path="/search" render={renderSearch} />
             {/* <Route path="/about" render={renderErrorPage} /> */}
           </Switch>
