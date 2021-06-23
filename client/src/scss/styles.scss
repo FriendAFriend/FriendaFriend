@@ -6,5 +6,6 @@
 @import '_trip';
 
 body {
-  color: coral;
+  color: $friendlyDirt;
+  font-family: 'Roboto', sans-serif;
 }
