@@ -14,12 +14,15 @@ const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_USER':
       return { ...state, ...action.payload };
-    case 'loginAccount':
+    case 'LOGIN_USER':
       return { ...state };
+    case 'LOGIN_FAILURE':
+      return {...state, loginErr: action.payload}
     default:
       return state;
   }
 };
+
 
 export default userReducer;
 
