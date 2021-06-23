@@ -36,6 +36,7 @@ photoController.createPhoto = (req, res, next) => {
                          WHERE user_id = $1`;
     db.query(queryString, queryParams, (err, result) => {
         if (err) return next({ status: 500, message: `Error in photoController.createPhoto: ${err}` });
+        res.locals.photos = result.rows;
         return next();
     });
 };
