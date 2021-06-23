@@ -1,19 +1,13 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { createAccount, loginAccount } from '../actions/index.js';
-//import { connect } from 'react-redux';
+import UserRegistration from './UserRegistration';
 
 function App() {
-  const state = useSelector((state) => state);
-  const dispatch = useDispatch();
-  // const { createAccount, loginAccount } = bindActionCreators(
-  //   actionCreators,
-  //   dispatch
-  // );
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <header className="App-header">
+        <h1>Friend A Friend</h1>
+        <UserRegistration />
+      </header>
     </div>
   );
 }

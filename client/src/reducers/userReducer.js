@@ -9,12 +9,14 @@ const initialState = {
   password: 'password1',
   phone: 7735612245,
   email: 'erik@me.com',
-}};
+},
+registering: true
+};
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'createAccount':
-    return {...state}
+    case 'CREATE_USER':
+      return { ...state, registering: true };
     case 'loginAccount' :
       return {...state}
     default:
