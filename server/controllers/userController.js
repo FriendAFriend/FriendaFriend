@@ -61,7 +61,7 @@ userController.createUser = async (req, res, next) => {
   const body = req.body;
   console.log('body in createUser', body);
   const SALT_FACTOR = 10;
-  const hashedPassword = await bcrypt.hash(req.body.password, SALT_FACTOR);
+  const hashedPassword = await bcrypt.hash(req.body.password1, SALT_FACTOR);
 
   const queryParams = [
     body.legal_name,

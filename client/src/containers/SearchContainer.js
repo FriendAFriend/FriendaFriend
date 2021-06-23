@@ -8,22 +8,22 @@ function SearchContainer() {
   const dispatch = useDispatch();
   const allListings = useSelector((state) => state.listings);
 
-  useEffect(() => {
-    dispatch(fetchListings().then(() => console.log('success')));
-  }, []);
-
-  const renderListings = allListings.map((listing) => (
-    <Listing key={listing.listing_id} name={listing.name} />
-  ));
-  //   const handleSearch = (e) => {
-  //     e.preventDefault();
+  //   useEffect(() => {
   //     dispatch(fetchListings().then(() => console.log('success')));
-  //   };
+  //   }, []);
+
+  //   const renderListings = allListings.map((listing) => (
+  //     <Listing key={listing.listing_id} name={listing.name} />
+  //   ));
+  const handleSearch = (e) => {
+    e.preventDefault();
+    dispatch(fetchListings().then(() => console.log('success')));
+  };
 
   return (
     <div>
       <SearchBar handleSearch={handleSearch} />
-      {renderListings}
+      {/* {renderListings} */}
     </div>
   );
 }

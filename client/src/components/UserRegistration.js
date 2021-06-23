@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-//import { createUser } from '../actions/actionCreators'; // add more actions
 import { createUser } from '../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,7 +10,6 @@ const UserRegistration = () => {
     email: '',
     password1: '',
     password2: '',
-    // password2: '', we need func to check if passwords are the same but
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -46,6 +44,17 @@ const UserRegistration = () => {
       );
     }
   }
+
+  function onClear(e) {
+    e.preventDefault();
+    setUser({
+      legal_name: '',
+      username: '',
+      email: '',
+      password1: '',
+      password2: '',
+    })
+}
 
   return (
     <div className="">
@@ -106,7 +115,7 @@ const UserRegistration = () => {
           )}
         </div>
         <div className="">
-          <button className="">Register</button>
+          <button className="" onClick={onClear}>Register</button>
         </div>
       </form>
     </div>
