@@ -16,6 +16,7 @@ router.get(
 
 // post a new user (sign-up logic)
 router.post('/signup', userController.createUser, (req, res) => {
+  console.log("made it to the userController")
   res.status(200).json(res.locals.user);
 });
 

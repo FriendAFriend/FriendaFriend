@@ -13,7 +13,7 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CREATE_USER':
-      return { ...state };
+      return { ...state, ...action.payload };
     case 'loginAccount':
       return { ...state };
     default:
