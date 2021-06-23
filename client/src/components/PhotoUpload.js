@@ -58,6 +58,7 @@ const PhotoUpload = (props) => {
       <div>
         <div className='buttons'>
           {content()}
+          {uploading && <Spinner/>}
         </div>
       </div>
     )
