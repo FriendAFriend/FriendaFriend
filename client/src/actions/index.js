@@ -1,7 +1,8 @@
 import store from '../store';
 
 export const createUser = (user) => async (dispatch, getState) => {
-  const res = await fetch('http://localhost:8080/api', user);
+  console.log('from create action redux');
+  const res = await fetch('http://localhost:8080/user/signup', user);
   const registeredUser = await res.json();
   dispatch({ type: 'CREATE_USER', payload: registeredUser });
 };

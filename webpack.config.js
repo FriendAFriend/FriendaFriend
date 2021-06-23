@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: ["babel-polyfill", './client/src/index.js' ],
+  entry: ['babel-polyfill', './client/src/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
@@ -66,6 +66,7 @@ module.exports = {
     proxy: {
       '/api/**': 'http://localhost:3000',
       '/': 'http://localhost:3000',
+      '/user': 'http://localhost:3000',
     },
     port: 8080,
     hot: true,

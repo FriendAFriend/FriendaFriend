@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const apiRouter = require('./routes/api');
-
+const userRouter = require('./routes/userRoutes');
 // handle parsing request body
 app.use(express.json());
 
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // API ROUTER logic handled in api.js
 app.use('/api', apiRouter);
-
+app.use('/user', userRouter);
 app.get('/', (req, res) =>
   res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'))
 );
