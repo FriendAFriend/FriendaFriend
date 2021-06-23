@@ -2,9 +2,12 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const apiRouter = require('./routes/api');
+const userRouter = require('./routes/userRoutes');
+const cookieParser = require('cookie-parser');
 
 // handle parsing request body
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
 if (process.env.NODE_ENV === 'production') {
@@ -19,6 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 
 // API ROUTER logic handled in api.js
 app.use('/api', apiRouter);
+app.use('/user', userRouter);
 
 app.get('/', (req, res) =>
   res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'))
@@ -33,6 +37,7 @@ app.get('/', (req, res) =>
 
 // global error handler
 app.use((err, req, res, next) => {
+  console.log(err, 'here is error in server');
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,
