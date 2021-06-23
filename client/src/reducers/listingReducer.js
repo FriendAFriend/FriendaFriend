@@ -20,4 +20,4 @@ const listingReducer = (state = initialStateListing, action) => {
   };
   
   
-  export default userReducer;
+  export default listingReducer;
