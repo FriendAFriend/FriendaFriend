@@ -10,6 +10,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PhotoUpload />
+      {/* <App /> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

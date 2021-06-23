@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import Spinner from './Spinner'
 import Images from './Images'
 import Buttons from './Buttons'
-// require('dotenv').config();
-// import { CLOUDINARY_URL } from './config';
 import '../scss/styles.scss';
 
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/diwmmmiwe/image/upload';
@@ -16,10 +14,9 @@ class PhotoUpload extends Component {
   }
 
   onChange = (e) => {
-    console.log('onchange fired', e.target.files);
-    const FileList = e.target.files;
     this.setState({ uploading: true });
-    const files = Array.from(FileList);
+    const files = Array.from(e.target.files);
+    
     files.forEach(file => {
       const formData = new FormData();
       formData.append('file', file);
@@ -33,15 +30,16 @@ class PhotoUpload extends Component {
         .then(image => {
           this.setState(prevState => { 
             return {
-              ...prevState,
-              images: [...prevState.images, image],
-          }});
+              uploading: prevState.uploading,
+              images: [...prevState.images, image]
+          }
+        });
         });
     });
     this.setState(prevState => {
       return {
         uploading: false, 
-        ...prevState.images
+        images: [...prevState.images]
       }
     });
     };
