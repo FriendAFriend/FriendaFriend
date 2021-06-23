@@ -18,6 +18,24 @@ export const loginAccount = (userInfo) => {
   };
 };
 
+export const addPhotos = (photosArray) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'addPhotos',
+      payload: photosArray
+    });
+  };
+};
+
+export const uploadingSwitch = (boolean) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'uploadingSwitch',
+      payload: boolean
+    });
+  };
+};
+
 // store.dispatch({
 //   type: 'createAccount',
 //   payload: {

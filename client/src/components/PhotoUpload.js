@@ -30,6 +30,7 @@ const PhotoUpload = (props) => {
       })
         .then(res => res.json())
         .then(image => {
+          console.log(image);
           setImages(prev => [...prev, image])
       });
     });
@@ -50,7 +51,7 @@ const PhotoUpload = (props) => {
       case images.length > 0:
         return <Images images={images} removeImage={removeImage} />
       default:
-        return <Buttons onChange={onChange} />
+        return <p>Upload an image!</p>
     }
   };
 
@@ -58,7 +59,7 @@ const PhotoUpload = (props) => {
       <div>
         <div className='buttons'>
           {content()}
-          {uploading && <Spinner/>}
+          <Buttons onChange={onChange}></Buttons>
         </div>
       </div>
     )

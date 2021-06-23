@@ -12,7 +12,7 @@ const Images = ({images, removeImage}) =>
       >
         <FontAwesomeIcon icon={faTimesCircle} size='2x' />
       </div>
-      <img src={image.secure_url} alt='' />
+      <img src={image.secure_url} alt='' style={{width: '10rem', height: '5rem', objectFit: 'contain', overflow: 'hidden'}} />
     </div>
   )}
 </div>
