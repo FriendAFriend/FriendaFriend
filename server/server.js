@@ -13,9 +13,12 @@ cloudinary.config({
 });
 
 app.use(formData.parse());
+const userRouter = require('./routes/userRoutes');
+const cookieParser = require('cookie-parser');
 
 // handle parsing request body
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -43,6 +46,7 @@ invludes all listing CRUD functionality
 as well as pet and photo storage - user 
 info for signup/login is a separate router */ 
 app.use('/api', apiRouter);
+app.use('/user', userRouter);
 
 // serve index
 app.get('/', (req, res) =>
@@ -56,6 +60,7 @@ app.use((req, res) =>
 
 // global error handler
 app.use((err, req, res, next) => {
+  console.log(err, 'here is error in server');
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 500,

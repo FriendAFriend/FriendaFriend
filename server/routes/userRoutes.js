@@ -6,9 +6,9 @@ const router = express.Router();
 
 // get user information (log in logic)
 router.get('/login',
-    userController.getUser, 
     userController.verifyUser, 
     (req, res) => {
+        //if successful to dashbaord
         res.status(200).json(res.locals.user);
 });
 
@@ -18,3 +18,5 @@ router.post('/signup',
     (req, res) => {
         res.status(200).json(res.locals.user);
 });
+
+module.exports = router;

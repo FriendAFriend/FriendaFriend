@@ -53,6 +53,7 @@ module.exports = {
     proxy: {
       '/api/**': 'http://localhost:3000',
       '/': 'http://localhost:3000',
+      '/user': 'http://localhost:3000'
     },
     port: 8080,
     hot: true,
