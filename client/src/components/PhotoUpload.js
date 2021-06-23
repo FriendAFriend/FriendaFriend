@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Spinner from './Spinner'
 import Images from './Images'
 import Buttons from './Buttons'
@@ -6,63 +6,53 @@ import '../scss/styles.scss';
 
 const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/diwmmmiwe/image/upload';
 
-class PhotoUpload extends Component {
+const PhotoUpload = (props) => {
   
-  state = {
-    uploading: false,
-    images: []
-  }
+  const [uploading, setUploading] = useState(false);
+  const [images, setImages] = useState([]);
 
-  onChange = (e) => {
-    this.setState({ uploading: true });
+  /* as files are uploaded, updates the state to show the spinner or, 
+  when completed, the images you've uploaded. Sends each file in a fetch
+  request to cloudinary api, creating stable urls */
+  const onChange = (e) => {
+    // sets contents to spinner until complete
+    setUploading(true);
     const files = Array.from(e.target.files);
     
     files.forEach(file => {
       const formData = new FormData();
       formData.append('file', file);
       formData.append('upload_preset', 'FriendAFriend');
-      console.log(formData);
+      
       fetch(`${CLOUDINARY_URL}`, {
         method: 'POST',
         body: formData
       })
         .then(res => res.json())
         .then(image => {
-          this.setState(prevState => { 
-            return {
-              uploading: prevState.uploading,
-              images: [...prevState.images, image]
-          }
-        });
-        });
+          setImages(prev => [...prev, image])
+      });
     });
-    this.setState(prevState => {
-      return {
-        uploading: false, 
-        images: [...prevState.images]
-      }
-    });
-    };
+    // with all of that done, stop displaying the spinner
+    setUploading(false);
+  };
 
-  removeImage = (id) => {
-    this.setState({
-      images: this.state.images.filter(image => image.public_id !== id)
-    })
+  const removeImage = (id) => {
+    setImages(prev => {
+      return prev.filter(image => image.public_id !== id);
+    });
   }
-  
-  render() {
-    const { uploading, images } = this.state;
 
-    const content = () => {
-      switch(true) {
-        case uploading:
-          return <Spinner />
-        case images.length > 0:
-          return <Images images={images} removeImage={this.removeImage} />
-        default:
-          return <Buttons onChange={this.onChange} />
-      }
-    };
+  const content = () => {
+    switch(true) {
+      case uploading:
+        return <Spinner />
+      case images.length > 0:
+        return <Images images={images} removeImage={removeImage} />
+      default:
+        return <Buttons onChange={onChange} />
+    }
+  };
 
     return (
       <div>
@@ -71,7 +61,6 @@ class PhotoUpload extends Component {
         </div>
       </div>
     )
-  }
 };
 
 export default PhotoUpload;
