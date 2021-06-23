@@ -5,7 +5,7 @@ const apiRouter = require('./routes/api');
 require('dotenv').config()
 const cloudinary = require('cloudinary')
 const formData = require('express-form-data')
-const cors = require('cors')
+// const cors = require('cors')
 
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -21,9 +21,9 @@ cloudinary.config({
   api_secret: process.env.API_SECRET
 });
   
-app.use(cors(
-  {origin: 'http://localhost:3000'}
-));
+// app.use(cors(
+//   {origin: 'http://localhost:3000'}
+// ));
 //   { 
 //   origin: '*', // "client_origin" 
 //   "Access-Control-Allow-Headers": '*'

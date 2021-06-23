@@ -6,7 +6,7 @@ import Buttons from './Buttons'
 // import { CLOUDINARY_URL } from './config';
 import '../scss/styles.scss';
 
-const CLOUDINARY_URL = 'cloudinary://147716195169729:z3CsbJd9YXSRFF6k9oZc9fJxI14@diwmmmiwe';
+const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/diwmmmiwe/image/upload';
 
 class PhotoUpload extends Component {
   
@@ -16,27 +16,32 @@ class PhotoUpload extends Component {
   }
 
   onChange = (e) => {
+    console.log('onchange fired', e.target.files);
     const files = Array.from(e.target.files)
     this.setState({ uploading: true })
 
-    const formData = new FormData()
+    const formData = new FormData();
 
     files.forEach((file, i) => {
-      formData.append(i, file)
+      formData.append('upload_preset', 'ml_default');
+      formData.append(i, file);
     })
 
-    fetch(`https://localhost:3000/image-upload`, {
-      method: 'POST',
-      body: formData
-    })
-    .then(res => res.json())
-    .then(images => {
-      this.setState({ 
-        uploading: false,
-        images
+      fetch(`${CLOUDINARY_URL}`, {
+        method: 'POST',
+        body: formData
       })
-    })
-  }
+      // console.log(data.json());
+      // const newData = data.json();
+      // console.log(newData);
+      .then(res => res.json())
+      .then(images => {
+        this.setState({ 
+          uploading: false,
+          images
+        })
+      })
+    }
 
   removeImage = (id) => {
     this.setState({
