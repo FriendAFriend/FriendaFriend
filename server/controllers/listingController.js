@@ -7,18 +7,12 @@ const listingController = {};
 
 // GET request for all details related to a listing
 listingController.getListing = (req, res, next) => {
-    const body = [req.body];
+    const user_id = req.params.user_id;
 
     const queryParams = [
-        body.user_id,
-        body.listing_name,
-        body.start_date,
-        body.end_date,
-        body.pending_status,
-        body.rating,
-        body.photo
-    ]; 
-    const queryString = `SELECT * FROM listing
+        user_id
+    ]; // ! _ID
+    const queryString = `SELECT * FROM public."listing"
                          WHERE user_id = $1;`;
     db.query(queryString, queryParams, (err, result) => {
       if (err) return next({ status: 500, message: `Error in listingController.getListing: ${err}` });
@@ -39,19 +33,23 @@ listingController.getAllListings = (req, res, next) => {
 
 /* inserts a new value into the listing table */ 
 listingController.createListing = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
+    // const user_id= req.params.user_id;
 
+//    console.log(user_id, 'is here !')
+    console.log(req.body);
     const queryParams = [
         body.user_id,
         body.listing_name,
         body.start_date,
         body.end_date,
-        body.pedning_status,
+        body.pending_status,
         body.rating,
-        body.photo
+        body.photo,
+        body.city
     ];
-    const queryString = `INSERT INTO listing
-                         VALUES user_id = $1, listing_name = $2, start_date = $3, end_date = $4, pedning_status = $5, rating = $6, photo = $7;`;
+    const queryString = `INSERT INTO "public"."listing" (user_id, listing_name, start_date, end_date, pending_status, rating, photo)
+                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
     db.query(queryString, queryParams, (err, result) => {
         if (err) return next({ status: 500, message: `Error in listingController.createListing: ${err}` });
         return next();
@@ -59,14 +57,16 @@ listingController.createListing = (req, res, next) => {
 };
 
 listingController.updateListing = (req, res, next) => {
-    const body = [res.body];
+    const body = req.body;
+    const user_id= req.params.user_id;
     
     const queryParams = [
-        body.user_id,
+        user_id,
+        body.listing_id,
         body.listing_name,
         body.start_date,
         body.end_date,
-        body.pedning_status,
+        body.pending_status,
         body.rating,
         body.photo
     ]; // ! see table
@@ -80,10 +80,12 @@ listingController.updateListing = (req, res, next) => {
 };
 
 listingController.deleteListing = (req, res, next) => {
-    const body = [req.body];
+    const body = req.body;
+    const user_id= req.params.user_id;
 
     const queryParams = [
-        body.user_id
+        user_id,
+        body.listing_name
     ];
     const queryString = `DELETE FROM listing
                          WHERE user_id = $1
