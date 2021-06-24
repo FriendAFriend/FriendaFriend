@@ -85,6 +85,8 @@ export const filterListingsByCity = (listings, location) => (dispatch) => {
   });
 };
 
+// ! photo upload actions, experimental
+
 export const addPhotos = (photosArray) => {
   return (dispatch) => {
     dispatch({
@@ -93,8 +95,6 @@ export const addPhotos = (photosArray) => {
     });
   };
 };
-
-// ! photo upload actions, experimental
 
 export const clearPhotos = () => {
   return (dispatch) => {

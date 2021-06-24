@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { set } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { createListing } from '../actions/actionCreators';
+import PhotoUpload from './PhotoUpload';
 
 const CreateListing = () => {
   const userId = ''; //fetch userid
