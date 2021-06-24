@@ -79,7 +79,7 @@ const CreateListing = () => {
       <form name="form" onSubmit={handleSubmit}>
         <div className="">
           <label>Photos</label>
-          <PhotoUpload />
+          <PhotoUpload setListing={setListing} listing={listing}/>
           <input
             type="file"
             accept="image/*"
