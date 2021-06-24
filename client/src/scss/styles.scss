@@ -4,8 +4,28 @@
 @import '_main';
 @import '_search';
 @import '_trip';
+@import '_nav';
 
 body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $white;
+  color: rgba(249, 249, 249);
+  background: url(../assets/paw_bg.svg) bottom center;
+  background-size: cover;
+  background-attachment: fixed;
   color: $friendlyDirt;
   font-family: 'Roboto', sans-serif;
+}
+.App {
+  // background: url(../assets/freq_bg.svg) bottom center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  // padding-left: 2%;
+  // padding-right: 2%;
+
+  //overflow: auto;
 }

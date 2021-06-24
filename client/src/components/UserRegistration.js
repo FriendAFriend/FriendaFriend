@@ -53,8 +53,8 @@ const UserRegistration = () => {
       email: '',
       password1: '',
       password2: '',
-    })
-}
+    });
+  }
 
   return (
     <div className="">
@@ -115,7 +115,9 @@ const UserRegistration = () => {
           )}
         </div>
         <div className="">
-          <button className="" onClick={onClear}>Register</button>
+          <button className="submitButton" onClick={onClear}>
+            Register
+          </button>
         </div>
       </form>
     </div>
