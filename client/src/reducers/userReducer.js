@@ -1,16 +1,14 @@
-const initialState = {
-  user_id: null,
-  legal_name: '',
-  city: '',
-  description: '',
-  pet_count: '',
-  username: '',
-  password: '',
-  phone: null,
-  email: '',
-};
 
-const userReducer = (state = initialState, action) => {
+
+const initialUserState = {
+  legal_name: '',
+  username: '',
+  email: '',
+  password1: '',
+  password2: '',
+}
+
+const userReducer = (state = initialUserState, action) => {
   switch (action.type) {
     case 'CREATE_USER':
       return { ...state, ...action.payload };
@@ -21,6 +19,8 @@ const userReducer = (state = initialState, action) => {
       };
     case 'LOGIN_FAILURE':
       return {...state, loginErr: action.payload}
+      case 'GET_USER_TRIPS':
+        return {...state, userTrips: action.payload}
     default:
       return state;
   }
@@ -29,14 +29,3 @@ const userReducer = (state = initialState, action) => {
 
 export default userReducer;
 
-// user: {
-//   user_id: 4,
-//   legal_name: 'Erik',
-//   city: 'chicago',
-//   description: 'description',
-//   pet_count: '2',
-//   username: 'easy1',
-//   password: 'password1',
-//   phone: 7735612245,
-//   email: 'erik@me.com',
-// },

@@ -7,7 +7,7 @@ function SearchBar(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchListings);
+    dispatch(fetchListings());
   }, []);
 
   return (

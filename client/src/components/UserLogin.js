@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,  } from 'react';
 import { loginUser } from '../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, Link } from 'react-router-dom';
 import { set } from 'react-hook-form';
 
 const UserLogin = () => {
@@ -8,8 +9,21 @@ const UserLogin = () => {
   const [user, setUser] = useState({
     username: '',
     password: '',
+    isLoggedIn: false
   });
   const [submitted, setSubmitted] = useState(false);
+  const history = useHistory();
+  //const loginFailed = useSelector((state) => state.user.loginErr)
+  const state = useSelector(state => state.user);
+  const { loggedIn, loginErr } = state;
+
+  useEffect(() => {
+      if(loggedIn){
+          history.push('/dashboard')
+      }
+
+      console.log("was fired", state)
+  })
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -22,7 +36,6 @@ const UserLogin = () => {
     setSubmitted(true);
     if (user.username && user.password) {
       dispatch(loginUser(user));
-      const loginFailure = useSelector((state) => state.userReducer.user);
     } else {
       window.alert('You must provide a username and password');
     }
@@ -35,7 +48,7 @@ const UserLogin = () => {
           <label>Username</label>
           <input
             type="text"
-            name="Username"
+            name="username"
             value={user.username}
             onChange={handleChange}
             className=""
@@ -50,7 +63,7 @@ const UserLogin = () => {
             onChange={handleChange}
             className=""
           />
-          {submitted && loginFailure && (
+          {submitted && loginErr && (
             <div className="">Username or Password incorrect</div>
           )}
         </div>

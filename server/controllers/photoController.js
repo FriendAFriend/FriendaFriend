@@ -1,6 +1,5 @@
 /* 
 this script handles the CRUD functionality relating to photo data
-* * note that adding and removing photos will require working with buffers * * 
 */ 
 const db = require('../models/model');
 
