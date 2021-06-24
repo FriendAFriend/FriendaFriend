@@ -14,13 +14,13 @@ const PhotoUpload = ({setListing, listing}) => {
   useEffect(() => {
     const urls = imageObjects.map(obj => obj.secure_url);
     setListing(prev => {
-      return {...prev, photos: urls}
+      return {...prev, photo: urls}
     });
-  }, [imageObjects]);
+  }, [uploading, imageObjects]);
 
   useEffect(() => {
     console.log(listing);
-  }, [listing]);
+  }, [listing, uploading]);
 
   /* as files are uploaded, updates the state to show the spinner or, 
   when completed, the imageObjects you've uploaded. Sends each file in a fetch
@@ -43,10 +43,10 @@ const PhotoUpload = ({setListing, listing}) => {
         const image = await res.json();
         console.log(image);
         await imageArray.push(image);
-        setImageObjects(imageArray);
+        setImageObjects(prev => [...prev, image]);
       });
     // with all of that done, stop displaying the spinner
-    setUploading(false);
+    await setUploading(false);
   };
 
   const removeImage = (id) => {
@@ -55,21 +55,24 @@ const PhotoUpload = ({setListing, listing}) => {
     });
   }
 
-  const content = () => {
-    switch(true) {
-      case uploading:
-        return <Spinner />
-      case imageObjects.length > 0:
-        return <Images imageObjects={imageObjects} removeImage={removeImage} />
-      default:
-        return <p>Upload an image!</p>
-    }
-  };
+  // const content = () => {
+  //   switch(true) {
+  //     case uploading:
+  //       return <Spinner />
+  //     case imageObjects.length > 0:
+  //       return <Images imageObjects={imageObjects} removeImage={removeImage} />
+  //     default:
+  //       return <p>Upload an image!</p>
+  //   }
+  // };
 
     return (
       <div>
         <div className='buttons'>
-          {content()}
+          <Images 
+            imageObjects={imageObjects} 
+            removeImage={removeImage}
+            uploading={uploading}/>
           <Buttons onChange={onChange}></Buttons>
         </div>
       </div>
