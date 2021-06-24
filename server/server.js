@@ -47,9 +47,7 @@ as well as pet and photo storage - user
 info for signup/login is a separate router */ 
 app.use('/api', apiRouter);
 app.use('/user', userRouter);
-
-// serve index
-app.get('/', (req, res) =>
+app.get('*', (req, res) =>
   res.status(200).sendFile(path.join(__dirname, '../client/public/index.html'))
 );
 

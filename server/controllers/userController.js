@@ -1,11 +1,10 @@
 /* 
 this script handles CRUD functionality for user schema for sign-up, login, authentication
-*/ 
+*/
 
 const db = require('../models/model');
 const bcrypt = require('bcrypt');
-const  { setAuthToken, setCookie, verifyJWT }   = require('./authController');
-
+const { setAuthToken, setCookie, verifyJWT } = require('./authController');
 
 const userController = {};
 
@@ -13,25 +12,26 @@ const userController = {};
 // ! what if we don't find any user with that email?
 // sets the user row onto res.locals.user
 userController.getUser = (req, res, next) => {
-    const body = req.body;
-    const queryParams = [
-      body.email
-    ];
-    const queryString = `SELECT * FROM public."user"
+  const body = req.body;
+  const queryParams = [body.email];
+  const queryString = `SELECT * FROM public."user"
                         WHERE email = $1;`;
-    db.query(queryString, queryParams, (err, result) => {
-      if (err) return next({ status: 500, message: `Error in userController.getUser. ${err}` });
+  db.query(queryString, queryParams, (err, result) => {
+    if (err)
+      return next({
+        status: 500,
+        message: `Error in userController.getUser. ${err}`,
+      });
 
-      res.locals.user = 'User does not exist' || result.rows[0];
-      return next();
-    });
-}
+    res.locals.user = 'User does not exist' || result.rows[0];
+    return next();
+  });
+};
 
 /* finds a user by email and compares the password with bcrypt user row is saved to res.locals.user */
 userController.verifyUser = async (req, res, next) => {
   const body = req.body;
   const token = req.cookies.jwt;
-  
 
   // console.log('here is req.cookies ', token);
   // console.log('here is password ', body.password);
@@ -42,20 +42,24 @@ userController.verifyUser = async (req, res, next) => {
     return next();
   }
 
-
-  const queryParams = [
-    body.email
-  ];
+  const queryParams = [body.email];
   const queryString = `SELECT * FROM public."user"
                        WHERE email = $1;`;
   db.query(queryString, queryParams, (err, result) => {
-    if (err) return next({ status: 500, message: `Error in userController.verifyUser: ${err}`});
+    if (err)
+      return next({
+        status: 500,
+        message: `Error in userController.verifyUser: ${err}`,
+      });
     if (result.rows.length === 0) {
-      return res.status(400).json({ userVerified: false, message: 'User not found. Please check email.' });
+      return res.status(400).json({
+        userVerified: false,
+        message: 'User not found. Please check email.',
+      });
     }
     bcrypt.compare(body.password, result.rows[0].password, (err, isMatched) => {
       if (isMatched === false) {
-        return res.redirect(401, '../routes/userRoutes/signup')
+        return res.redirect(401, '../routes/userRoutes/signup');
         // return res.status(400).json({ userVerified: false, message: 'Password incorrect.'});
       }
       res.locals.user = result.rows[0];
@@ -67,7 +71,7 @@ userController.verifyUser = async (req, res, next) => {
 
 // creates a user row with bcrypted password
 // TODO does not seem to have collision handling for an already created user?
-// try catch to send create user error, err 
+// try catch to send create user error, err
 userController.createUser = async (req, res, next) => {
   const body = req.body;
   console.log('body in createUser', body);
@@ -80,7 +84,7 @@ userController.createUser = async (req, res, next) => {
     body.pet_count,
     body.username,
     hashedPassword,
-    body.email
+    body.email,
   ];
   const queryString = `INSERT INTO public."user" (legal_name, pet_count, username, password, email)
                        VALUES ($1, $2, $3, $4, $5);`;
