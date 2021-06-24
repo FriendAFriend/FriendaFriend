@@ -122,3 +122,14 @@ export const uploadingSwitch = (bool) => {
     });
   };
 };
+export const updateListing = (listing) => async (dispatch, getState) => {
+  const res = await fetch('http://localhost:8080/api/newListing', {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(listing),
+  });
+  const updateListing = await res.json();
+  dispatch({ type: 'UPDATE_LISTING', payload: updateListing });
+};
