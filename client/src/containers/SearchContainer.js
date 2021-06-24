@@ -17,22 +17,24 @@ function SearchContainer() {
   const { listings, user} = state
   const allListings = listings.filteredListings
   const userId = user.user.user_id
-
+  
+console.log("these are just listings", listings.listings)
   const [filtered, setFilter] = useState({ name: '' });
   useEffect(() => {
     dispatch(fetchListings());
     console.log(allListings, 'all listings');
     console.log(state, 'state');
-  }, [userId]);
+  }, []);
 
-  const bookListing = () => {
+  const bookListing = (id, availabilty, booked_by) => {
+    console.log("ths is the target", id)
     console.log(userId)
-    dispatch(updateListing(user.user.user_id)).then(()=>{
+    dispatch(updateListing(id)).then(()=>{
       console.log("heheheheh")
     })
   };
 
-  const renderListings = allListings.map((listing) => (
+  const renderListings = listings.listings.map((listing) => (
     <Listing key={listing.listing_id} listing={listing} bookListing={bookListing}/>
   ));
   const handleSearch = (e) => {
@@ -44,7 +46,7 @@ function SearchContainer() {
 
   const handleChange = (e) => {
     e.preventDefault();
-    console.log('target: ', e.target.value);
+    console.log('target: ', e.target);
     const { name, value } = e.target;
     setFilter((filtered) => ({ ...filtered, [name]: value }));
     dispatch(filterListingsByName(allListings, e.target.value));
