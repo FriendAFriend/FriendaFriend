@@ -13,20 +13,21 @@ function SearchContainer() {
   const dispatch = useDispatch();
   //const allListings = useSelector((state) => state.listings.filteredListings);
   const state = useSelector((state) => state);
+  console.log(state)
   const { listings, user} = state
   const allListings = listings.filteredListings
-  const id = user.user.user_id
+  const userId = user.user.user_id
 
   const [filtered, setFilter] = useState({ name: '' });
   useEffect(() => {
     dispatch(fetchListings());
     console.log(allListings, 'all listings');
     console.log(state, 'state');
-  }, []);
+  }, [userId]);
 
-  const bookListing = (id) => {
-    console.log(id)
-    dispatch(updateListing(id)).then(()=>{
+  const bookListing = () => {
+    console.log(user.user.user_id)
+    dispatch(updateListing(user.user.user_id)).then(()=>{
       console.log("heheheheh")
     })
   };
