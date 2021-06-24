@@ -1,3 +1,4 @@
+import { useRouteMatch } from 'react-router';
 import store from '../store';
 
 export const createUser = (user) => async (dispatch, getState) => {
@@ -12,20 +13,10 @@ export const createUser = (user) => async (dispatch, getState) => {
   const registeredUser = await res.json();
   dispatch({ type: 'CREATE_USER', payload: registeredUser });
 };
-// export const createUser = (user) => async (dispatch, getState) => {
-//   return (dispatch) => {
-//     dispatch({
-//       type: 'CREATE_USER',
-//       payload: user,
-//     });
-//     const res = fetch('POST', 'http://localhost:8080/api', user);
-//     const registeredUser = await res.json();
-//     dispatch({ type: 'CREATE_USER', payload: registeredUser });
-//   };
-// };
+
 
 export const loginUser = (user) => async (dispatch, getState) => {
-  console.log('from create action redux login');
+  console.log('from create action redux login', user);
   try {
     const res = await fetch('http://localhost:8080/user/signup', {
       method: 'POST',
@@ -36,9 +27,12 @@ export const loginUser = (user) => async (dispatch, getState) => {
     });
 
     const loggedInUser = await res.json();
-    dispatch({ type: 'LOGIN_USER', payload: loggedInUser });
+    loggedInUser.isLoggedIn = true
+    //dispatch({ type: 'LOGIN_USER', payload: loggedInUser });
   } catch (err) {
-    dispatch({ type: 'LOGIN_FAILURE', payload: true });
+    user.isLoggedIn = true
+    dispatch({ type: 'LOGIN_USER', payload: user });
+    //dispatch({ type: 'LOGIN_FAILURE', payload: true });
   }
 };
 
@@ -54,17 +48,18 @@ export const createListing = (listing) => async (dispatch, getState) => {
   dispatch({ type: 'NEW_LISTING', payload: newListing });
 };
 
-export const fetchListings = () => async (dispatch, getState) => {
-  const res = await fetch('http://localhost:8080/api/dashboard');
-  const listing = await res.json();
-  console.log(listing, 'all listings from fetch');
-
-  dispatch({
-    type: 'FETCH_LISTINGS',
-    payload: listing,
-  });
+export const fetchListings = () => (dispatch) => {
+  fetch('http://localhost:8080/api')
+    .then((res) => res.json())
+    .then(
+      dispatch({
+        type: 'FETCH_LISTINGS',
+        payload: listing.data,
+      })
+      //(listing) => console.log(listing)
+    );
 };
-//(listing) => console.log(listing)
+
 export const filterListingsByName = (listings, name) => (dispatch) => {
   dispatch({
     type: 'FILTER_LIST_BY_NAME',
@@ -86,3 +81,9 @@ export const filterListingsByCity = (listings, location) => (dispatch) => {
     },
   });
 };
+
+export const getTrips = (user) => async (dispatch, getState) => {
+  const res = await fetch('http://localhost:8080/user/userTrips')
+  const userTrips = await res.json()
+  dispatch({ type: 'GET_USER_TRIPS', payload: userTrips})
+}

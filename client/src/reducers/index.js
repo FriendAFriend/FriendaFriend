@@ -4,7 +4,7 @@ import listingReducer from './listingReducer';
 import createListingReducer from './createListingReducer';
 
 const rootReducer = combineReducers({
-  userReducer,
+  user: userReducer,
   createListingReducer,
   listings: listingReducer,
 });
