@@ -69,9 +69,11 @@ listingController.createListing = (req, res, next) => {
 };
 
 listingController.updateListing = (req, res, next) => {
+  console.log("made it here babayaybayba")
   const body = req.body;
   const user_id = req.params.user_id;
 
+  console.log("body is", body)
   const queryParams = [
     body.listing_id,
     // user_id,

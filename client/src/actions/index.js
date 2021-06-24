@@ -129,14 +129,14 @@ export const uploadingSwitch = (bool) => {
     });
   };
 };
-export const updateListing = (listing) => async (dispatch, getState) => {
+export const updateListing = (listing, availabilty, booked_by) => async (dispatch, getState) => {
   console.log("we made it to the update listing action creator")
   const res = await fetch(`http://localhost:8080/api/updateListing/${listing}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(listing),
+    body: JSON.stringify(listing, availabilty, booked_by ),
   });
   const updateListing = await res.json();
   console.log("response from fetch req")
