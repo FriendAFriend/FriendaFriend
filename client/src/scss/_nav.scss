@@ -1,0 +1,39 @@
+header {
+  padding-top: 1%;
+  width: 100vw;
+  //   border-bottom: 2px solid $friendlyDirt;
+  margin-bottom: 20px;
+  font-weight: normal;
+  letter-spacing: 7.2px;
+  box-shadow: -6px -2px 30px rgba(255, 255, 255, 0.15),
+    -6px -2px 30px rgba(0, 0, 0, 0.15);
+  a {
+    transition-duration: 50ms;
+  }
+}
+.logo-main {
+  display: flex;
+  justify-content: center;
+  padding: 50%;
+}
+
+.nav-links {
+  margin: auto;
+  left: 50%;
+  right: 50%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  margin-bottom: 2%;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: $friendlyGrass;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+  transform: scale(1.1);
+}

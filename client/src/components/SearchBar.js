@@ -11,7 +11,7 @@ function SearchBar(props) {
   }, []);
 
   return (
-    <div>
+    <div className="searchBar">
       <h2>Search Listings</h2>
       <p>Find a Loving Home to Swap</p>
       <form name="form" onSubmit={props.handleSearch}>
@@ -20,9 +20,11 @@ function SearchBar(props) {
         </label>
         <input
           type="text"
-          id="header-search"
+          id="s-input"
           placeholder="Enter Name"
           name="name"
+          value={props.filtered.name}
+          onChange={props.handleChange}
         />
         <button type="submit">Search</button>
       </form>

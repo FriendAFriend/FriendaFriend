@@ -59,9 +59,12 @@ export const filterListingsByName = (listings, name) => (dispatch) => {
     type: 'FILTER_LIST_BY_NAME',
     payload: {
       name: name,
-      listings: listings.filter((item) => item.listing_name.toLowerCase()),
+      listings: listings.filter((item) => {
+        return item.listing_name.match(new RegExp(name, 'g'));
+      }),
     },
   });
+  console.log('filter from actions', listings);
 };
 
 export const filterListingsByCity = (listings, location) => (dispatch) => {
