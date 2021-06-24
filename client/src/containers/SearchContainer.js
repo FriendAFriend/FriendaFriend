@@ -27,6 +27,9 @@ function SearchContainer() {
     dispatch(fetchListings());
     console.log(allListings, 'all listings');
   };
+  const bookListing = () => {
+    dispatch(updateListing());
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -44,6 +47,7 @@ function SearchContainer() {
         handleSearch={handleSearch}
         filtered={filtered}
         handleChange={handleChange}
+        bookListing={bookListing}
       />
       <div className="row">{renderListings}</div>
     </div>
