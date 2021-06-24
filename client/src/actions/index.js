@@ -1,7 +1,14 @@
 import store from '../store';
 
 export const createUser = (user) => async (dispatch, getState) => {
-  const res = await fetch('http://localhost:8080/api/', user);
+  console.log('from create action redux');
+  const res = await fetch('http://localhost:8080/user/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  });
   const registeredUser = await res.json();
   dispatch({ type: 'CREATE_USER', payload: registeredUser });
 };
@@ -17,25 +24,66 @@ export const createUser = (user) => async (dispatch, getState) => {
 //   };
 // };
 
-export const loginUser = (userInfo) => {
-  return (dispatch) => {
-    dispatch({
-      type: 'loginUser',
-      payload: userInfo,
+export const loginUser = (user) => async (dispatch, getState) => {
+  console.log('from create action redux login');
+  try {
+    const res = await fetch('http://localhost:8080/user/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
     });
-  };
+
+    const loggedInUser = await res.json();
+    dispatch({ type: 'LOGIN_USER', payload: loggedInUser });
+  } catch (err) {
+    dispatch({ type: 'LOGIN_FAILURE', payload: true });
+  }
 };
 
-// store.dispatch({
-//   type: 'createAccount',
-//   payload: {
-//     description: 'userInfo',
-//   },
-// });
+export const createListing = (listing) => async (dispatch, getState) => {
+  const res = await fetch('http://localhost:8080/api/newListing', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(listing),
+  });
+  const newListing = await res.json();
+  dispatch({ type: 'NEW_LISTING', payload: newListing });
+};
 
-// store.dispatch({
-//   type: 'loginAccount',
-//   payload: {
-//     description: 'userInfo',
-//   },
-// });
+export const fetchListings = () => (dispatch) => {
+  fetch('http://localhost:8080/api')
+    .then((res) => res.json())
+    .then(
+      dispatch({
+        type: 'FETCH_LISTINGS',
+        payload: listing.data,
+      })
+      //(listing) => console.log(listing)
+    );
+};
+
+export const filterListingsByName = (listings, name) => (dispatch) => {
+  dispatch({
+    type: 'FILTER_LIST_BY_NAME',
+    payload: {
+      name: name,
+      listings: listings.filter((item) => item.listing_name.toLowerCase()),
+    },
+  });
+};
+
+export const filterListingsByCity = (listings, location) => (dispatch) => {
+  dispatch({
+    type: 'FILTER_LIST_BY_CITY',
+    payload: {
+      location: location,
+      listings: listings.filter((item) =>
+        item.city.toLowerCase().startsWith(location)
+      ),
+    },
+  });
+};

@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './client/src/index.js',
+  entry: ['babel-polyfill', './client/src/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
@@ -15,7 +15,20 @@ module.exports = {
         use: {
           loader: 'babel-loader', // 'file-loader'
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  useBuiltIns: 'entry',
+                },
+              ],
+              '@babel/preset-react',
+            ],
+            plugins: [
+              '@babel/plugin-proposal-class-properties',
+              '@babel/plugin-proposal-export-default-from',
+              'react-hot-loader/babel',
+            ],
           },
         },
       },
@@ -53,6 +66,7 @@ module.exports = {
     proxy: {
       '/api/**': 'http://localhost:3000',
       '/': 'http://localhost:3000',
+      '/user': 'http://localhost:3000',
     },
     port: 8080,
     hot: true,
