@@ -99,8 +99,9 @@ export const filterListingsByCity = (listings, location) => (dispatch) => {
   });
 };
 
-export const getTrips = (user) => async (dispatch, getState) => {
-  const res = await fetch('http://localhost:8080/user/userTrips')
+export const getTrips = (userId) => async (dispatch, getState) => {
+  console.log("hit get trips with" , userId)
+  const res = await fetch(`http://localhost:8080/user/getTrips/${userId}`)
   const userTrips = await res.json()
   dispatch({ type: 'GET_USER_TRIPS', payload: userTrips})
 }

@@ -30,7 +30,7 @@ userController.getUser = (req, res, next) => {
 
 userController.getUserTrips = (req, res, next) => {
   const params = req.params
-  console.log('here are PARAMS :', params.user_id);
+  console.log('here are PARAMS :', params);
   const queryParams = [
     params.user_id
   ];
