@@ -49,15 +49,16 @@ userController.getUserTrips = (req, res, next) => {
 userController.verifyUser = async (req, res, next) => {
   const body = req.body;
   const token = req.cookies.jwt;
-
+ console.log(body)
   // console.log('here is req.cookies ', token);
   // console.log('here is password ', body.password);
-  const isVerified = await verifyJWT(token, body.password, res, next);
-  console.log('this is verified :', isVerified);
+  // const isVerified = await verifyJWT(token, body.password, res, next);
+  // console.log('this is verified :', isVerified);
 
-  if (isVerified) {
-    return next();
-  }
+  // if (isVerified) {
+    
+  //   return next();
+  // }
 
   const queryParams = [body.email];
   const queryString = `SELECT * FROM public."user"
@@ -94,7 +95,8 @@ userController.createUser = async (req, res, next) => {
   console.log('body in createUser', body);
   const SALT_FACTOR = 10;
 
-  const hashedPassword = await bcrypt.hash(body.password, SALT_FACTOR);
+  const hashedPassword = await bcrypt.hash(body.password1, SALT_FACTOR);
+  console.log(hashedPassword)
 
   const queryParams = [
     body.legal_name,
@@ -106,10 +108,10 @@ userController.createUser = async (req, res, next) => {
   const queryString = `INSERT INTO public."user" (legal_name, pet_count, username, password, email)
                        VALUES ($1, $2, $3, $4, $5);`;
   db.query(queryString, queryParams, async (err, result) => {
-    // console.log(err.detail, 'here is error in create user');
+    console.log(err, 'here is error in create user');
     if (err) return next(err.detail, 'Username or email already exist');
     console.log('here is token line 1');
-    const token = await setAuthToken(body.username, body.password);
+    const token = await setAuthToken(body.username, body.password1);
     console.log(token, 'here is token');
     const testCookie = await setCookie(token, res);
     console.log(testCookie.jwt, 'hereh is cookies in UC');

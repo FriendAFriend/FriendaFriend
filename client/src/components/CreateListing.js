@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createListing } from '../actions/actionCreators';
 
 const CreateListing = () => {
+  const dispatch = useDispatch()
   const userId = ''; //fetch userid
   const [submitted, setSubmitted] = useState(false);
   const [listing, setListing] = useState({
@@ -22,12 +23,16 @@ const CreateListing = () => {
     setListing((listing) => ({ ...listing, [name]: value }));
   }
 
-  function handleChangePhotos(e) {
+  async function handleChangePhotos(e) {
     const { name, value } = e.target;
+    console.log(value, "this is the value")
     const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
+    const file = await reader.readAsDataURL(e.target.files[0]);
+    console.log("file is", file.data)
     reader.onload = () => {
-      setListing((listing) => ({ ...listing, ...listing.photo.push(value) }));
+        console.log("photos looks like", listing[name])
+      setListing((listing) => ({ ...listing, ...listing[name].push("e") }));
+  
     };
   }
 
@@ -76,8 +81,8 @@ const CreateListing = () => {
           <input
             type="file"
             accept="image/*"
-            name="city"
-            value={listing.city}
+            name="photo"
+            value={listing.photo}
             onChange={handleChangePhotos}
             className=""
           />

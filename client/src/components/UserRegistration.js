@@ -6,6 +6,7 @@ const UserRegistration = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState({
     legal_name: '',
+    pet_count: 0,
     username: '',
     email: '',
     password1: '',
@@ -14,7 +15,7 @@ const UserRegistration = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const registering = useSelector((state) => state);
-  console.log('registering');
+  // console.log('registering');
   //   useEffect(() => {
   //     dispatch(userActions.logout());
   //   }, []);
@@ -28,9 +29,11 @@ const UserRegistration = () => {
     e.preventDefault();
 
     setSubmitted(true);
+    console.log(submitted)
     if (
       user.legal_name &&
       user.username &&
+      user.pet_count &&
       user.password1 &&
       user.password2 &&
       user.email
@@ -49,10 +52,11 @@ const UserRegistration = () => {
     e.preventDefault();
     setUser({
       legal_name: '',
+      pet_count: '',
       username: '',
       email: '',
       password1: '',
-      password2: '',
+      password2: ''
     })
 }
 
@@ -92,6 +96,16 @@ const UserRegistration = () => {
           />
         </div>
         <div className="">
+          <label>Pet Count</label>
+          <input
+            type="text"
+            name="pet_count"
+            value={user.pet_count}
+            onChange={handleChange}
+            className=""
+          />
+        </div>
+        <div className="">
           <label>Password</label>
           <input
             type="password"
@@ -101,6 +115,7 @@ const UserRegistration = () => {
             className=""
           />
         </div>
+        
         <div className="">
           <label>Confirm Password</label>
           <input
@@ -115,7 +130,7 @@ const UserRegistration = () => {
           )}
         </div>
         <div className="">
-          <button className="" onClick={onClear}>Register</button>
+          <button className="" >Register</button>
         </div>
       </form>
     </div>

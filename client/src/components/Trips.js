@@ -6,14 +6,15 @@ function Trips() {
 
   const dispatch = useDispatch()
 
-  const userTrips = useSelector((state) => state.user.userTrips);
+  //const userTrips = useSelector((state) => state.user.userTrips);
 
   //can only use useSelector once per comp. not sure how to get the active user here to then dispatch 
 
 
   useEffect(() => {
-    dispatch(getTrips());
-  }, []);
+    
+    dispatch(getTrips(user));
+  });
   
 
  

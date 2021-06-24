@@ -11,9 +11,10 @@ const router = express.Router();
 //   return res.redirect(200, './api/dashboard');
 // });
 
-router.get('/login', userController.verifyUser, (req, res) => {
+router.post('/login', userController.verifyUser, (req, res) => {
   //if successful to dashbaord
   console.log('successful login');
+  
   //return res.redirect(200, './api/dashboard');
   return res.json(res.locals.user)
   ///no need for redirect here

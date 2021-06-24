@@ -7,7 +7,7 @@ import { set } from 'react-hook-form';
 const UserLogin = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState({
-    username: '',
+    email: '',
     password: '',
     isLoggedIn: false
   });
@@ -21,8 +21,7 @@ const UserLogin = () => {
       if(loggedIn){
           history.push('/dashboard')
       }
-
-      console.log("was fired", state)
+      //console.log("was fired", state)
   })
 
   function handleChange(e) {
@@ -34,7 +33,7 @@ const UserLogin = () => {
     e.preventDefault();
 
     setSubmitted(true);
-    if (user.username && user.password) {
+    if (user.email && user.password) {
       dispatch(loginUser(user));
     } else {
       window.alert('You must provide a username and password');
@@ -45,11 +44,11 @@ const UserLogin = () => {
       <h2>Login</h2>
       <form name="form" onSubmit={handleSubmit}>
         <div className="">
-          <label>Username</label>
+          <label>Email</label>
           <input
             type="text"
-            name="username"
-            value={user.username}
+            name="email"
+            value={user.email}
             onChange={handleChange}
             className=""
           />
@@ -64,7 +63,7 @@ const UserLogin = () => {
             className=""
           />
           {submitted && loginErr && (
-            <div className="">Username or Password incorrect</div>
+            <div className="">Email or Password incorrect</div>
           )}
         </div>
         <div className="">

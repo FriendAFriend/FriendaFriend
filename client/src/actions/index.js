@@ -11,25 +11,31 @@ export const createUser = (user) => async (dispatch, getState) => {
     body: JSON.stringify(user),
   });
   const registeredUser = await res.json();
+  console.log(registeredUser)
   dispatch({ type: 'CREATE_USER', payload: registeredUser });
 };
 
 
 export const loginUser = (user) => async (dispatch, getState) => {
   console.log('from create action redux login', user);
-  try {
-    const res = await fetch('http://localhost:8080/user/signup', {
+
+  try{
+    const res = await fetch('http://localhost:8080/user/login', 
+    {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user),
-    });
-
+      body: JSON.stringify(user)
+    })
+    
     const loggedInUser = await res.json();
+   
     loggedInUser.isLoggedIn = true
-    //dispatch({ type: 'LOGIN_USER', payload: loggedInUser });
+    console.log("here", loggedInUser)
+    dispatch({ type: 'LOGIN_USER', payload: loggedInUser });
   } catch (err) {
+    console.log("err here")
     user.isLoggedIn = true
     dispatch({ type: 'LOGIN_USER', payload: user });
     //dispatch({ type: 'LOGIN_FAILURE', payload: true });
