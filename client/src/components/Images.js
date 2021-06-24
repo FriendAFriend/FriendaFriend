@@ -2,9 +2,9 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 
-const Images = ({images, removeImage}) => 
+const Images = ({imageObjects, removeImage}) => 
 <div>
-  {images.map((image, i) =>
+  {imageObjects.map((image, i) =>
     <div key={i} className='fadein'>
       <div 
         onClick={() => removeImage(image.public_id)} 
