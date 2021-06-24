@@ -27,11 +27,19 @@ export const addPhotos = (photosArray) => {
   };
 };
 
-export const uploadingSwitch = (boolean) => {
+export const clearPhotos = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'clearPhotos'
+    });
+  };
+};
+
+export const uploadingSwitch = (bool) => {
   return (dispatch) => {
     dispatch({
       type: 'uploadingSwitch',
-      payload: boolean
+      payload: bool
     });
   };
 };

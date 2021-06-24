@@ -9,7 +9,9 @@ const photoReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'addPhotos': 
             return {...state, photos: action.payload};
-        case 'uploading': 
+        case 'clearPhotos': 
+            return {...state, photos: []};
+        case 'uploadingSwitch': 
             return {...state, uploading: action.payload};
         default: 
             return state;
