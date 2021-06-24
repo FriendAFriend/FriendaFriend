@@ -17,8 +17,8 @@ router.get('/myListings', listingController.getListing, (req, res) => {
 });
 
 // post request creates a listing with associated pet and photos table insertions
-router.post(
-  '/newListing',
+router.put(
+  '/updateListing',
   listingController.createListing,
   // ! do we then want to reroute them to the dashboard and display all listings?
   (req, res) => {

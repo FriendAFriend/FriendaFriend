@@ -130,7 +130,8 @@ export const uploadingSwitch = (bool) => {
   };
 };
 export const updateListing = (listing) => async (dispatch, getState) => {
-  const res = await fetch('http://localhost:8080/api/newListing', {
+  console.log("we made it to the update listing action creator")
+  const res = await fetch(`http://localhost:8080/api/updateListing/${listing}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -138,5 +139,6 @@ export const updateListing = (listing) => async (dispatch, getState) => {
     body: JSON.stringify(listing),
   });
   const updateListing = await res.json();
+  console.log("response from fetch req")
   dispatch({ type: 'UPDATE_LISTING', payload: updateListing });
 };

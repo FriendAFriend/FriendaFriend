@@ -5,13 +5,18 @@ import {
   fetchListings,
   filterListingsByName,
   filterListingsByCity,
+  updateListing
 } from '../actions/index';
 import { useDispatch, useSelector } from 'react-redux';
 
 function SearchContainer() {
   const dispatch = useDispatch();
-  const allListings = useSelector((state) => state.listings.filteredListings);
+  //const allListings = useSelector((state) => state.listings.filteredListings);
   const state = useSelector((state) => state);
+  const { listings, user} = state
+  const allListings = listings.filteredListings
+  const id = user.user.user_id
+
   const [filtered, setFilter] = useState({ name: '' });
   useEffect(() => {
     dispatch(fetchListings());
@@ -19,17 +24,22 @@ function SearchContainer() {
     console.log(state, 'state');
   }, []);
 
+  const bookListing = (id) => {
+    console.log(id)
+    dispatch(updateListing(id)).then(()=>{
+      console.log("heheheheh")
+    })
+  };
+
   const renderListings = allListings.map((listing) => (
-    <Listing key={listing.listing_id} listing={listing} />
+    <Listing key={listing.listing_id} listing={listing} bookListing={bookListing}/>
   ));
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(fetchListings());
     console.log(allListings, 'all listings');
   };
-  const bookListing = () => {
-    dispatch(updateListing());
-  };
+ 
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -47,7 +57,7 @@ function SearchContainer() {
         handleSearch={handleSearch}
         filtered={filtered}
         handleChange={handleChange}
-        bookListing={bookListing}
+    
       />
       <div className="row">{renderListings}</div>
     </div>

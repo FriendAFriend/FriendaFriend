@@ -7,7 +7,7 @@ function Listing(props) {
     <div className="card">
       <h2>{listing_name.toUpperCase()}</h2>
       <h2>{city.toUpperCase()}</h2>
-      <button onClick="props.bookListing">Add Listing</button>
+      <button onClick={() => props.bookListing()}>Add Listing</button>
     </div>
   );
 }
