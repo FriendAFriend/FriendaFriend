@@ -74,6 +74,7 @@ const CreateListing = () => {
       <form name="form" onSubmit={handleSubmit}>
         <div className="">
           <label>Photos</label>
+          <PhotoUpload />
           <input
             type="file"
             accept="image/*"
