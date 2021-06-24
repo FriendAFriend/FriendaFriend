@@ -28,6 +28,23 @@ userController.getUser = (req, res, next) => {
   });
 };
 
+userController.getUserTrips = (req, res, next) => {
+  const body = req.body
+  const queryParams = [body._id]
+  const queryString = `need help here`
+
+  db.query(queryString, queryParams, (err, result) => {
+    if(err)
+    return next({
+      status: 500,
+      message: `Error in userController.getUserTrips ${err}`
+    });
+
+    res.locals.userTrips = result.rows[0];
+    return next();
+  })
+}
+
 /* finds a user by email and compares the password with bcrypt user row is saved to res.locals.user */
 userController.verifyUser = async (req, res, next) => {
   const body = req.body;

@@ -1,3 +1,4 @@
+import { useRouteMatch } from 'react-router';
 import store from '../store';
 
 export const createUser = (user) => async (dispatch, getState) => {
@@ -13,8 +14,9 @@ export const createUser = (user) => async (dispatch, getState) => {
   dispatch({ type: 'CREATE_USER', payload: registeredUser });
 };
 
+
 export const loginUser = (user) => async (dispatch, getState) => {
-  console.log('from create action redux login');
+  console.log('from create action redux login', user);
   try {
     const res = await fetch('http://localhost:8080/user/signup', {
       method: 'POST',
@@ -25,9 +27,12 @@ export const loginUser = (user) => async (dispatch, getState) => {
     });
 
     const loggedInUser = await res.json();
-    dispatch({ type: 'LOGIN_USER', payload: loggedInUser });
+    loggedInUser.isLoggedIn = true
+    //dispatch({ type: 'LOGIN_USER', payload: loggedInUser });
   } catch (err) {
-    dispatch({ type: 'LOGIN_FAILURE', payload: true });
+    user.isLoggedIn = true
+    dispatch({ type: 'LOGIN_USER', payload: user });
+    //dispatch({ type: 'LOGIN_FAILURE', payload: true });
   }
 };
 
@@ -84,6 +89,12 @@ export const filterListingsByCity = (listings, location) => (dispatch) => {
     },
   });
 };
+
+export const getTrips = (user) => async (dispatch, getState) => {
+  const res = await fetch('http://localhost:8080/user/userTrips')
+  const userTrips = await res.json()
+  dispatch({ type: 'GET_USER_TRIPS', payload: userTrips})
+}
 
 // ! photo upload actions, experimental
 
