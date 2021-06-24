@@ -63,6 +63,7 @@ listingController.createListing = (req, res, next) => {
         status: 500,
         message: `Error in listingController.createListing: ${err}`,
       });
+      res.locals.listing = result.rows[0];
     return next();
   });
 };
@@ -72,24 +73,23 @@ listingController.updateListing = (req, res, next) => {
   const user_id = req.params.user_id;
 
   const queryParams = [
-    user_id,
     body.listing_id,
-    body.listing_name,
-    body.start_date,
-    body.end_date,
+    // user_id,
     body.pending_status,
-    body.rating,
-    body.photo,
+    body.booked_by,
   ]; // ! see table
-  const queryString = `UPDATE listing
-                         SET listing_name = $2, start_date = $3, end_date = $4, pending_status = $5, rating = $6, photo = $7
-                         WHERE user_id = $1;`;
+  const queryString = `UPDATE public."listing"
+                        SET pending_status = $2, booked_by = $3
+                         WHERE listing_id = $1;`;
+                         //SET listing_name = $2 , start_date = $3, end_date = $4, pending_status = $5, rating = $6, photo = $7, city = $8, booked_by = $9
+                         //  SET listing_name = $3, start_date = $4, end_date = $5, pending_status = $6, rating = $7, photo = $8, city = $9, booked_by = $10
   db.query(queryString, queryParams, (err, result) => {
     if (err)
       return next({
         status: 500,
         message: `Error in listingController.updateListing: ${err}`,
       });
+    res.locals.listing = result.rows;
     return next();
   });
 };
