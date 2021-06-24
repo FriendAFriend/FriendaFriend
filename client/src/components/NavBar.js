@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import logo from '../assets/logo.svg';
 // import Cookies from 'universal-cookie';
 // const cookies = new Cookies();
 
@@ -9,30 +9,28 @@ const Navbar = () => {
   //   cookies.remove("jwt");
   return (
     <header>
-      <div id="logo-main-container">
-        {/* <img id="logo-main" src={Logo} width="50"></img> */}
-      </div>
+      <img id="logo-main" src={logo} width="50"></img>
 
       <ul className="nav-links">
-        <NavLink className="navLink" to="/">
+        <NavLink className="nav-links" to="/">
           HOME
         </NavLink>
 
-        <NavLink className="navLink" to="/signup">
+        <NavLink className="nav-links" to="/signup">
           REGISTER
         </NavLink>
-        <NavLink className="navLink" to="/login">
+        <NavLink className="nav-links" to="/login">
           LOGIN
         </NavLink>
 
-        <NavLink className="navLink" to="/dashboard">
+        <NavLink className="nav-links" to="/dashboard">
           DASHBOARD
         </NavLink>
-        <NavLink className="navLink" to="/pets">
+        <NavLink className="nav-links" to="/pets">
           PETS
         </NavLink>
 
-        <NavLink className="navLink" to="/search">
+        <NavLink className="nav-links" to="/search">
           SEARCH
         </NavLink>
 

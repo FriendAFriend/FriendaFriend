@@ -31,25 +31,20 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Friend A Friend</h1>
-        <div>
-          <style>
-            @import
-            url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,900;1,100&display=swap');
-          </style>
-          <NavBar />
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/signup" render={renderRegisterForm} />
-            <Route path="/login" render={renderLoginForm} />
-            <Route path="/dashboard" render={renderDashboard} />
-            <Route path="/pets" render={renderPets} />
-            <Route path="/search" render={renderSearch} />
-            {/* <Route path="/about" render={renderErrorPage} /> */}
-          </Switch>
-        </div>
-      </header>
+      <style>
+        @import
+        url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,900;1,100&display=swap');
+      </style>
+      <NavBar />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/signup" render={renderRegisterForm} />
+        <Route path="/login" render={renderLoginForm} />
+        <Route path="/dashboard" render={renderDashboard} />
+        <Route path="/pets" render={renderPets} />
+        <Route path="/search" render={renderSearch} />
+        {/* <Route path="/about" render={renderErrorPage} /> */}
+      </Switch>
     </div>
   );
 }

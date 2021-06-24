@@ -2,26 +2,21 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import getTrips from '../actions/actionCreators'
 
-function Trips() {
+const Trips = () => {
 
   const dispatch = useDispatch()
 
-  //const userTrips = useSelector((state) => state.user.userTrips);
-
-  //can only use useSelector once per comp. not sure how to get the active user here to then dispatch 
-
+  const user = useSelector(state => state.user)
+  
 
   useEffect(() => {
-    
-    dispatch(getTrips(user));
+    console.log("current user is ", user)
   });
   
 
- 
-  return
-  (<div>
-    <h2>Upcoming Trips</h2>
-  </div>)
+  return(
+    <div>Hello</div>
+  )
 }
 
 export default Trips;

@@ -29,9 +29,14 @@ userController.getUser = (req, res, next) => {
 };
 
 userController.getUserTrips = (req, res, next) => {
-  const body = req.body
-  const queryParams = [body._id]
-  const queryString = `need help here`
+  const params = req.params
+  console.log('here are PARAMS :', params.user_id);
+  const queryParams = [
+    params.user_id
+  ];
+
+  const queryString = `SELECT * FROM public."listing"
+                       WHERE booked_by = $1;`;
 
   db.query(queryString, queryParams, (err, result) => {
     if(err)
@@ -39,8 +44,8 @@ userController.getUserTrips = (req, res, next) => {
       status: 500,
       message: `Error in userController.getUserTrips ${err}`
     });
-
-    res.locals.userTrips = result.rows[0];
+    console.log(result.rows);
+    res.locals.userTrips = result.rows;
     return next();
   })
 }
