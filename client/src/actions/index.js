@@ -54,18 +54,17 @@ export const createListing = (listing) => async (dispatch, getState) => {
   dispatch({ type: 'NEW_LISTING', payload: newListing });
 };
 
-export const fetchListings = () => (dispatch) => {
-  fetch('http://localhost:8080/api')
-    .then((res) => res.json())
-    .then(
-      dispatch({
-        type: 'FETCH_LISTINGS',
-        payload: listing.data,
-      })
-      //(listing) => console.log(listing)
-    );
-};
+export const fetchListings = () => async (dispatch, getState) => {
+  const res = await fetch('http://localhost:8080/api/dashboard');
+  const listing = await res.json();
+  console.log(listing, 'all listings from fetch');
 
+  dispatch({
+    type: 'FETCH_LISTINGS',
+    payload: listing,
+  });
+};
+//(listing) => console.log(listing)
 export const filterListingsByName = (listings, name) => (dispatch) => {
   dispatch({
     type: 'FILTER_LIST_BY_NAME',
