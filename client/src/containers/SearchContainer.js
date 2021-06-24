@@ -26,7 +26,7 @@ function SearchContainer() {
   }, [userId]);
 
   const bookListing = () => {
-    console.log(user.user.user_id)
+    console.log(userId)
     dispatch(updateListing(user.user.user_id)).then(()=>{
       console.log("heheheheh")
     })
