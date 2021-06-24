@@ -1,0 +1,61 @@
+.submitButton {
+  background: white;
+  border-radius: 8px 8px 8px 8px;
+  border-width: 0ch;
+  border-color: rgb(180, 180, 180);
+  font-family: Roboto;
+  font-size: 20px;
+  color: rgb(92, 92, 92);
+  margin: 2%;
+
+  box-shadow: -2px -6px 15px #fff, 2px 6px 15px rgba(0, 0, 0, 0.15);
+}
+.submitButton:hover {
+  transform: scale(1.1);
+  transition: all 0.4s;
+  box-shadow: -2px -6px 15px #fff, 2px 6px 15px rgba(0, 0, 0, 0.15);
+}
+.dropShadow {
+  padding-top: 0.3%;
+  height: 5vh;
+  width: 80vw;
+  box-shadow: -2px -6px 15px #fff, 2px 6px 15px rgba(0, 0, 0, 0.15);
+  color: $friendlyGrass;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  margin: auto;
+  margin-top: 10vh;
+  text-align: center;
+  height: 50vh;
+  width: 20vw;
+  background: rgba(249, 249, 249, 0.075);
+  box-shadow: -6px -2px 30px rgba(255, 255, 255, 0.15),
+    -6px -2px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 30px 30px 30px 30px;
+  padding: 10px;
+  flex-direction: column;
+}
+.formContent {
+  flex-direction: row;
+  align-items: right;
+  text-align: right;
+  justify-content: space-evenly;
+  padding-right: 100px;
+}
+
+.input {
+  margin: 10px;
+  // font-family: Jost;
+  font-size: 18px;
+  border: 0ch;
+  background-color: #e8f0fe;
+  color: $friendlyGrass;
+}
+
+label {
+  font-size: 18px;
+}
