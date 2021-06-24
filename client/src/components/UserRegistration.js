@@ -56,9 +56,9 @@ const UserRegistration = () => {
       username: '',
       email: '',
       password1: '',
-      password2: ''
-    })
-}
+      password2: '',
+    });
+  }
 
   return (
     <div className="">

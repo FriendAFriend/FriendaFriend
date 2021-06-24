@@ -1,0 +1,100 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: auto;
+  width: 80vw;
+}
+
+.card {
+  margin: 1%;
+  padding: 0.5%;
+  height: 350px;
+  width: 20%;
+
+  z-index: 1;
+  border-radius: 10%;
+  background: rgba(249, 249, 249, 0.075);
+  box-shadow: -6px -2px 30px rgba(255, 255, 255, 0.15),
+    -6px -2px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 30px 30px 30px 30px;
+  font-size: 12px;
+}
+
+.searchBar {
+  margin: auto;
+  margin-top: 3vh;
+  text-align: left;
+  height: 20vh;
+  width: 70vw;
+  background: rgba(249, 249, 249, 0.075);
+  box-shadow: -6px -2px 30px rgba(255, 255, 255, 0.15),
+    2px 6px 15px rgba(0, 0, 0, 0.15);
+  padding: 2%;
+  flex-direction: column;
+  border-radius: 30px;
+  label {
+    font-size: 18px;
+  }
+}
+.searchBarContent {
+  flex-direction: row;
+  align-items: right;
+  text-align: right;
+  justify-content: space-evenly;
+  padding-right: 100px;
+}
+
+.s-input {
+  margin: 10px;
+  font-family: Roboto;
+  font-size: 17px;
+  border: 0ch;
+  background-color: #e0e0e0;
+  padding: 0.5%;
+  color: #575757;
+}
+
+.s-options {
+  margin: 10px;
+  font-family: Libre Baskerville;
+  font-size: 18px;
+  border: 0ch;
+  background-color: #e0e0e0;
+  color: #51463a;
+  color: rgb(90, 90, 90);
+  padding: 0.5%;
+}
+
+//   .entry1 {
+//     margin: 1%;
+//     padding: 0.5%;
+//     height: 100px;
+//     width: 50%;
+//     font-size: 20px;
+//     z-index: 1;
+//     border-radius: 10%;
+//     background: rgba(249, 249, 249, 0.075);
+//     box-shadow: -6px -2px 30px rgba(255, 255, 255, 0.15),
+//       -6px -2px 30px rgba(0, 0, 0, 0.15);
+//     border-radius: 30px 30px 30px 30px;
+//     font-size: 12px;
+//   }
+//   .catContent {
+//     h3 {
+//       padding-left: 20px;
+//     }
+//     padding: 1%;
+//     text-align: left;
+//   }
+//   .catContent1 {
+//     margin: 20px;
+//     h3 {
+//       padding-left: 20px;
+//     }
+//     padding: 1%;
+//     //text-align: left;
+//     justify-content: center;
+//     // margin-left: 500px;
+//   }

@@ -1,10 +1,12 @@
 import React from 'react';
 
 function Listing(props) {
-  // const {name} = props
+  const { listing_name, city } = props.listing;
+
   return (
-    <div>
-      <h2>New Listing</h2>
+    <div className="card">
+      <h2>{listing_name.toUpperCase()}</h2>
+      <h2>{city.toUpperCase()}</h2>
     </div>
   );
 }

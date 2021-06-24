@@ -7,6 +7,10 @@ const Trips = () => {
   const dispatch = useDispatch()
 
   const user = useSelector(state => state.user)
+<<<<<<< HEAD
+=======
+  
+>>>>>>> dev
 
   useEffect(() => {
     console.log("current user is ", user)
