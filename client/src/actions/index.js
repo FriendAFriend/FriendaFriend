@@ -48,6 +48,14 @@ export const createListing = (listing) => async (dispatch, getState) => {
   dispatch({ type: 'NEW_LISTING', payload: newListing });
 };
 
+
+
+// store.dispatch({
+//   type: 'createAccount',
+//   payload: {
+//     description: 'userInfo',
+//   },
+// });
 export const fetchListings = () => (dispatch) => {
   fetch('http://localhost:8080/api')
     .then((res) => res.json())
@@ -87,3 +95,31 @@ export const getTrips = (user) => async (dispatch, getState) => {
   const userTrips = await res.json()
   dispatch({ type: 'GET_USER_TRIPS', payload: userTrips})
 }
+
+// ! photo upload actions, experimental
+
+export const addPhotos = (photosArray) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'addPhotos',
+      payload: photosArray
+    });
+  };
+};
+
+export const clearPhotos = () => {
+  return (dispatch) => {
+    dispatch({
+      type: 'clearPhotos'
+    });
+  };
+};
+
+export const uploadingSwitch = (bool) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'uploadingSwitch',
+      payload: bool
+    });
+  };
+};
